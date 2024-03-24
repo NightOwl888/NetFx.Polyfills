@@ -20,6 +20,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		LICENSE = LICENSE
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{CC8AB861-E86D-4247-99D4-FA41796629AA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetFx.System.Runtime.CompilerServices.Unsafe.Tests", "tests\NetFx.System.Runtime.CompilerServices.Unsafe.Tests\NetFx.System.Runtime.CompilerServices.Unsafe.Tests.csproj", "{1B76E7B6-B4E6-4051-825A-0EB5ED9C6163}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,12 +34,17 @@ Global
 		{F79D5B6E-CE71-4ABE-ACB8-6385E8C91C63}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F79D5B6E-CE71-4ABE-ACB8-6385E8C91C63}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F79D5B6E-CE71-4ABE-ACB8-6385E8C91C63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B76E7B6-B4E6-4051-825A-0EB5ED9C6163}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B76E7B6-B4E6-4051-825A-0EB5ED9C6163}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B76E7B6-B4E6-4051-825A-0EB5ED9C6163}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B76E7B6-B4E6-4051-825A-0EB5ED9C6163}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{F79D5B6E-CE71-4ABE-ACB8-6385E8C91C63} = {A6DF412F-8147-4D1F-B388-0B0284A55772}
+		{1B76E7B6-B4E6-4051-825A-0EB5ED9C6163} = {CC8AB861-E86D-4247-99D4-FA41796629AA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {218685F0-A12E-4700-A441-099683BEF62D}

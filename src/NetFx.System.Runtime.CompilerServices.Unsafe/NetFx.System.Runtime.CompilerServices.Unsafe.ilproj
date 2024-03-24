@@ -96,4 +96,10 @@ $(ExtraMacros)
     </ItemGroup>
   </Target>
 
+  <!-- Microsoft.NET.Sdk.IL doesn't support strong naming, so we have to add a step to sign the assembly after it is built.
+      We add the .publickey element to the .il (hard coded for now) to make this work. -->
+  <Target Name="SignAssembly" AfterTargets="AfterBuild">
+    <Exec Command="&quot;$(TargetFrameworkSDKToolsDirectory)sn.exe&quot; -R &quot;$(TargetPath)&quot; &quot;$(AssemblyOriginatorKeyFile)&quot;" />
+  </Target>
+
 </Project>

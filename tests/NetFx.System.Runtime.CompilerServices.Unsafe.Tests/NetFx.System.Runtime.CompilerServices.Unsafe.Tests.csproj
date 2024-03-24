@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <TargetFramework>net48</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <MicrosoftNETTestSdkPackageReferenceVersion>16.1.1</MicrosoftNETTestSdkPackageReferenceVersion>
+    <XunitPackageReferenceVersion>2.4.1</XunitPackageReferenceVersion>
+    <XunitRunnerVisualStudioPackageReferenceVersion>$(XunitPackageReferenceVersion)</XunitRunnerVisualStudioPackageReferenceVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(MicrosoftNETTestSdkPackageReferenceVersion)" />
+    <PackageReference Include="xunit" Version="$(XunitPackageReferenceVersion)" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="$(XunitRunnerVisualStudioPackageReferenceVersion)">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\NetFx.System.Runtime.CompilerServices.Unsafe\NetFx.System.Runtime.CompilerServices.Unsafe.ilproj" />
+  </ItemGroup>
+  
+</Project>
