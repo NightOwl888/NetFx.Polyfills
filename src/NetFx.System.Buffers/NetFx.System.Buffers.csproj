@@ -1,17 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net40</TargetFrameworks>
-    <IsPackable>true</IsPackable>
-    <Nullable>enable</Nullable>
-    <RootNamespace></RootNamespace>
+    <TargetFramework>net40</TargetFramework>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\NetFx.System.Buffers\NetFx.System.Buffers.csproj" />
-    <ProjectReference Include="..\NetFx.System.Runtime.CompilerServices.Unsafe\NetFx.System.Runtime.CompilerServices.Unsafe.ilproj" />
-  </ItemGroup>
 
   <ItemGroup>
     <Compile Update="Resources\SR.Designer.cs">
