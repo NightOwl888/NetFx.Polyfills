@@ -1,8 +1,11 @@
-﻿// Decompiled with JetBrains decompiler
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
+// Decompiled with Visual Studio decompiler
 // Type: System.ReadOnlyMemory`1
 // Assembly: System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51
 // MVID: 866AE087-4753-44D8-B4C3-B8D9EAD86168
-// Assembly location: F:\Users\shad\source\repos\CheckSystemMemoryDependencies\CheckSystemMemoryDependencies\bin\Debug\net45\System.Memory.dll
 
 using System.Buffers;
 using System.ComponentModel;
@@ -29,7 +32,7 @@ namespace System
         private readonly object? _object;
         private readonly int _index;
         private readonly int _length;
-        internal const int RemoveFlagsBitMask = 2147483647;
+        internal const int RemoveFlagsBitMask = 0x7FFFFFFF;
 
         /// <summary>
         /// Creates a new memory over the entirety of the target array.
@@ -45,12 +48,10 @@ namespace System
                 this = default;
                 return; // returns default
             }
-            else
-            {
-                _object = array;
-                _index = 0;
-                _length = array.Length;
-            }
+
+            _object = array;
+            _index = 0;
+            _length = array.Length;
         }
 
         /// <summary>
@@ -75,15 +76,13 @@ namespace System
                 this = default;
                 return; // returns default
             }
-            else
-            {
-                if ((uint)start > (uint)array.Length || (uint)length > (uint)(array.Length - start))
-                    ThrowHelper.ThrowArgumentOutOfRangeException();
 
-                _object = array;
-                _index = start;
-                _length = length;
-            }
+            if ((uint)start > (uint)array.Length || (uint)length > (uint)(array.Length - start))
+                ThrowHelper.ThrowArgumentOutOfRangeException();
+
+            _object = array;
+            _index = start;
+            _length = length;
         }
 
         /// <summary>Creates a new memory over the existing object, start, and length. No validation is performed.</summary>
@@ -131,9 +130,15 @@ namespace System
         {
             if (typeof(T) == typeof(char))
             {
-                return (_object is string str) ? str.Substring(_index, _length) : Span.ToString();
+                if (!(_object is string text))
+                {
+                    return Span.ToString();
+                }
+
+                return text.Substring(_index, _length & RemoveFlagsBitMask);
             }
-            return $"System.ReadOnlyMemory<{typeof(T).Name}>[{_length}]";
+
+            return $"System.ReadOnlyMemory<{typeof(T).Name}>[{_length & RemoveFlagsBitMask}]";
         }
 
         /// <summary>
@@ -146,13 +151,14 @@ namespace System
         //[MethodImpl(MethodImplOptions.AggressiveInlining)]
         public ReadOnlyMemory<T> Slice(int start)
         {
-            if ((uint)start > (uint)_length)
+            int length = _length;
+            int num = length & RemoveFlagsBitMask;
+            if ((uint)start > (uint)num)
             {
                 ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.start);
             }
 
-            // It is expected for _index + start to be negative if the memory is already pre-pinned.
-            return new ReadOnlyMemory<T>(_object, _index + start, _length - start);
+            return new ReadOnlyMemory<T>(_object, _index + start, length - start);
         }
 
         /// <summary>
@@ -166,11 +172,14 @@ namespace System
         //[MethodImpl(MethodImplOptions.AggressiveInlining)]
         public ReadOnlyMemory<T> Slice(int start, int length)
         {
-            if ((uint)start > (uint)_length || (uint)length > (uint)(_length - start))
+            int length2 = _length;
+            int num = _length & RemoveFlagsBitMask;
+            if ((uint)start > (uint)num || (uint)length > (uint)(num - start))
+            {
                 ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.start);
+            }
 
-            // It is expected for _index + start to be negative if the memory is already pre-pinned.
-            return new ReadOnlyMemory<T>(_object, _index + start, length);
+            return new ReadOnlyMemory<T>(_object, _index + start, length | (length2 & int.MinValue));
         }
 
         /// <summary>
@@ -181,13 +190,25 @@ namespace System
             //[MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
-                if (_object is null)
-                    return default;
                 if (_index < 0)
-                    return (ReadOnlySpan<T>)((MemoryManager<T>)_object).GetSpan().Slice(_index, _length);
-                if (typeof(T) == typeof(char) && _object is string str)
-                    return new ReadOnlySpan<T>(Unsafe.As<Pinnable<T>>(str), MemoryExtensions.StringAdjustment, str.Length).Slice(_index, _length);
-                return new ReadOnlySpan<T>((T[])_object, _index, _length);
+                {
+                    return ((MemoryManager<T>)_object!).GetSpan().Slice(_index & RemoveFlagsBitMask, _length);
+                }
+
+                ReadOnlySpan<T> result;
+                if (typeof(T) == typeof(char) && _object is string text)
+                {
+                    result = new ReadOnlySpan<T>(Unsafe.As<Pinnable<T>>(text), MemoryExtensions.StringAdjustment, text.Length);
+                    return result.Slice(_index, _length);
+                }
+
+                if (_object != null)
+                {
+                    return new ReadOnlySpan<T>((T[])_object, _index, _length & RemoveFlagsBitMask);
+                }
+
+                result = default;
+                return result;
             }
         }
 
@@ -224,22 +245,31 @@ namespace System
         /// </summary>
         public unsafe MemoryHandle Pin()
         {
-            if (_object is not null)
+            if (_index < 0)
             {
-                if (_index < 0)
-                    return ((MemoryManager<T>)_object).Pin(_index);
-                if (typeof(T) == typeof(char) && _object is string str)
-                {
-                    GCHandle handle = GCHandle.Alloc(str, GCHandleType.Pinned);
-                    return new MemoryHandle(Unsafe.Add<T>((void*)handle.AddrOfPinnedObject(), _index), handle);
-                }
-                if (!(_object is T[] objArray))
-                    return default;
-                if (_length < 0)
-                    return new MemoryHandle(Unsafe.Add<T>(Unsafe.AsPointer(ref MemoryMarshal.GetReference((Span<T>)objArray)), _index));
-                GCHandle handle1 = GCHandle.Alloc(objArray, GCHandleType.Pinned);
-                return new MemoryHandle(Unsafe.Add<T>((void*)handle1.AddrOfPinnedObject(), _index), handle1);
+                return ((MemoryManager<T>)_object!).Pin(_index & RemoveFlagsBitMask);
             }
+
+            if (typeof(T) == typeof(char) && _object is string value)
+            {
+                GCHandle handle = GCHandle.Alloc(value, GCHandleType.Pinned);
+                void* pointer = Unsafe.Add<T>((void*)handle.AddrOfPinnedObject(), _index);
+                return new MemoryHandle(pointer, handle);
+            }
+
+            if (_object is T[] array)
+            {
+                if (_length < 0)
+                {
+                    void* pointer2 = Unsafe.Add<T>(Unsafe.AsPointer(ref MemoryMarshal.GetReference<T>(array)), _index);
+                    return new MemoryHandle(pointer2);
+                }
+
+                GCHandle handle2 = GCHandle.Alloc(array, GCHandleType.Pinned);
+                void* pointer3 = Unsafe.Add<T>((void*)handle2.AddrOfPinnedObject(), _index);
+                return new MemoryHandle(pointer3, handle2);
+            }
+
             return default;
         }
 
@@ -252,7 +282,7 @@ namespace System
 
         /// <summary>Determines whether the specified object is equal to the current object.</summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (obj is ReadOnlyMemory<T> readOnlyMemory)
             {
@@ -284,14 +314,12 @@ namespace System
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override int GetHashCode()
         {
-            if (this._object == null)
+            if (_object == null)
+            {
                 return 0;
-            int hashCode1 = this._object.GetHashCode();
-            int num = this._index;
-            int hashCode2 = num.GetHashCode();
-            num = this._length;
-            int hashCode3 = num.GetHashCode();
-            return ReadOnlyMemory<T>.CombineHashCodes(hashCode1, hashCode2, hashCode3);
+            }
+
+            return CombineHashCodes(_object.GetHashCode(), _index.GetHashCode(), _length.GetHashCode());
         }
 
         private static int CombineHashCodes(int left, int right)
