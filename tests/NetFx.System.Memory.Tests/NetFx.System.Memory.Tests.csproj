@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\NetFx.System.Buffers\NetFx.System.Buffers.csproj" />
+    <ProjectReference Include="..\..\src\NetFx.System.Memory\NetFx.System.Memory.csproj" />
+  </ItemGroup>
+
+</Project>
