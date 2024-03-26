@@ -53,8 +53,8 @@ namespace System.Buffers
         [MethodImpl(8)]
         private static ArrayPool<T> EnsureSharedCreated()
         {
-            Interlocked.CompareExchange<ArrayPool<T>>(ref ArrayPool<T>.s_sharedInstance, ArrayPool<T>.Create(), null);
-            return ArrayPool<T>.s_sharedInstance;
+            Interlocked.CompareExchange(ref s_sharedInstance, Create(), null);
+            return s_sharedInstance;
         }
 
         /// <summary>Retrieves a buffer that is at least the requested length.</summary>

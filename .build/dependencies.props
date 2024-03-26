@@ -1,0 +1,8 @@
+
+<Project>
+  <PropertyGroup Label="NuGet Package Reference Versions">
+    <MicrosoftNETTestSdkPackageReferenceVersion>16.1.1</MicrosoftNETTestSdkPackageReferenceVersion>
+    <XunitPackageReferenceVersion>2.4.1</XunitPackageReferenceVersion>
+    <XunitRunnerVisualStudioPackageReferenceVersion>$(XunitPackageReferenceVersion)</XunitRunnerVisualStudioPackageReferenceVersion>
+  </PropertyGroup>
+</Project>

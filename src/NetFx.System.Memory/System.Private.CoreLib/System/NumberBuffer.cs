@@ -16,6 +16,7 @@ namespace System
         public bool IsNegative;
         public const int BufferSize = 51;
         private byte _b0;
+#pragma warning disable IDE0044, IDE0051, CS0169 // Remove unused private members
         private byte _b1;
         private byte _b2;
         private byte _b3;
@@ -66,6 +67,7 @@ namespace System
         private byte _b48;
         private byte _b49;
         private byte _b50;
+#pragma warning restore IDE0044, IDE0051, CS0169 // Remove unused private members
 
         public unsafe Span<byte> Digits
         {

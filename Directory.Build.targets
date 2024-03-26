@@ -1,0 +1,13 @@
+<Project>
+
+  <Import Project="$(MSBuildThisFileDirectory)/.build/dependencies.props" Condition="Exists('$(MSBuildThisFileDirectory)/.build/dependencies.props')" />
+
+  <Target Name="AddCLSCompliant" BeforeTargets="BeforeCompile" Label="Adds CLSCompliant Attribute (if specified)">
+    <ItemGroup Condition=" '$(CLSCompliant.ToLowerInvariant())' == 'true' Or '$(CLSCompliant.ToLowerInvariant())' == 'false' ">
+      <AssemblyAttribute Include="System.CLSCompliantAttribute">
+        <_Parameter1>$(CLSCompliant.ToLowerInvariant())</_Parameter1>
+      </AssemblyAttribute>
+    </ItemGroup>
+  </Target>
+  
+</Project>
