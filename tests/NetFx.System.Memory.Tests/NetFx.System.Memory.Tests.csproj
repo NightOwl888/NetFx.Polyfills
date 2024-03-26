@@ -10,4 +10,6 @@
     <ProjectReference Include="..\..\src\NetFx.System.Memory\NetFx.System.Memory.csproj" />
   </ItemGroup>
 
+  <Import Project="$(RepositoryRoot)/.build/NetFx.System.Runtime.CompilerServices.Unsafe.Ref.targets" />
+
 </Project>

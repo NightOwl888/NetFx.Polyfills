@@ -10,8 +10,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\NetFx.System.Buffers\NetFx.System.Buffers.csproj" />
-    <ProjectReference Include="..\NetFx.System.Runtime.CompilerServices.Unsafe\NetFx.System.Runtime.CompilerServices.Unsafe.ilproj" />
   </ItemGroup>
+
+  <Import Project="$(RepositoryRoot)/.build/NetFx.System.Runtime.CompilerServices.Unsafe.Ref.targets" />
 
   <ItemGroup>
     <Compile Update="Resources\SR.Designer.cs">

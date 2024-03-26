@@ -1,0 +1,14 @@
+<Project>
+  <!-- Since .ilproj is not buildable inside of Visual Studio, we use this workaround to temporarily override the reference to the built assembly.
+     Note that you must first run 'dotnet build -c Release' or 'dotnet build -c Debug' from the project root prior to running in Visual Studio
+     to ensure the NetFx.System.Runtime.CompilerServices.Unsafe.dll exists and is up to date. -->
+  <ItemGroup Condition="'$(BuildingInsideVisualStudio)' != 'true'">
+    <ProjectReference Include="$(RepositoryRoot)\src\NetFx.System.Runtime.CompilerServices.Unsafe\NetFx.System.Runtime.CompilerServices.Unsafe.ilproj" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(BuildingInsideVisualStudio)' == 'true'">
+    <Reference Include="NetFx.System.Runtime.CompilerServices.Unsafe">
+      <HintPath>$(RepositoryRoot)\src\NetFx.System.Runtime.CompilerServices.Unsafe\bin\$(Configuration)\net40\NetFx.System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>
