@@ -206,6 +206,7 @@ namespace System.Runtime.InteropServices
         {
             TManager? objectStartLength;
             manager = objectStartLength = memory.GetObjectStartLength(out start, out length) as TManager;
+            start &= int.MaxValue;
 
             Debug.Assert(length >= 0);
 
