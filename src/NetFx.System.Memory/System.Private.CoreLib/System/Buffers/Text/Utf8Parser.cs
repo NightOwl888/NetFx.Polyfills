@@ -2,7 +2,6 @@
 // Type: System.Buffers.Text.Utf8Parser
 // Assembly: System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51
 // MVID: 866AE087-4753-44D8-B4C3-B8D9EAD86168
-// Assembly location: F:\Users\shad\source\repos\CheckSystemMemoryDependencies\CheckSystemMemoryDependencies\bin\Debug\net45\System.Memory.dll
 
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
@@ -4062,93 +4061,87 @@ namespace System.Buffers.Text
 
             public bool TrySplitTimeSpan(ReadOnlySpan<byte> source, bool periodUsedToSeparateDay, out int bytesConsumed)
             {
-                int start = 0;
-                byte num = 0;
-                for (; start != source.Length; ++start)
+                int i = 0;
+                byte b = 0;
+                for (; i != source.Length; i++)
                 {
-                    num = source[start];
-                    switch (num)
+                    b = source[i];
+                    if (b != 32 && b != 9)
                     {
-                        case 9:
-                        case 32:
-                            continue;
-                        default:
-                            goto label_4;
+                        break;
                     }
                 }
-            label_4:
-                if (start == source.Length)
+                if (i == source.Length)
                 {
                     bytesConsumed = 0;
                     return false;
                 }
-                if (num == (byte)45)
+                if (b == 45)
                 {
-                    this.IsNegative = true;
-                    ++start;
-                    if (start == source.Length)
+                    IsNegative = true;
+                    i++;
+                    if (i == source.Length)
                     {
                         bytesConsumed = 0;
                         return false;
                     }
                 }
-                int bytesConsumed1;
-                if (!TryParseUInt32D(source.Slice(start), out this.V1, out bytesConsumed1))
+                if (!TryParseUInt32D(source.Slice(i), out V1, out var bytesConsumed2))
                 {
                     bytesConsumed = 0;
                     return false;
                 }
-                int srcIndex = start + bytesConsumed1;
-                ComponentParseResult component1 = ParseComponent(source, periodUsedToSeparateDay, ref srcIndex, out this.V2);
-                switch (component1)
+                i += bytesConsumed2;
+                ComponentParseResult componentParseResult = ParseComponent(source, periodUsedToSeparateDay, ref i, out V2);
+                switch (componentParseResult)
                 {
-                    case ComponentParseResult.NoMoreData:
-                        bytesConsumed = srcIndex;
-                        return true;
                     case ComponentParseResult.ParseFailure:
                         bytesConsumed = 0;
                         return false;
+                    case ComponentParseResult.NoMoreData:
+                        bytesConsumed = i;
+                        return true;
                     default:
-                        this.Separators |= (uint)component1 << 24;
-                        ComponentParseResult component2 = ParseComponent(source, false, ref srcIndex, out this.V3);
-                        switch (component2)
+                        Separators |= (uint)componentParseResult << 24;
+                        componentParseResult = ParseComponent(source, neverParseAsFraction: false, ref i, out V3);
+                        switch (componentParseResult)
                         {
-                            case ComponentParseResult.NoMoreData:
-                                bytesConsumed = srcIndex;
-                                return true;
                             case ComponentParseResult.ParseFailure:
                                 bytesConsumed = 0;
                                 return false;
+                            case ComponentParseResult.NoMoreData:
+                                bytesConsumed = i;
+                                return true;
                             default:
-                                this.Separators |= (uint)component2 << 16;
-                                ComponentParseResult component3 = ParseComponent(source, false, ref srcIndex, out this.V4);
-                                switch (component3)
+                                Separators |= (uint)componentParseResult << 16;
+                                componentParseResult = ParseComponent(source, neverParseAsFraction: false, ref i, out V4);
+                                switch (componentParseResult)
                                 {
-                                    case ComponentParseResult.NoMoreData:
-                                        bytesConsumed = srcIndex;
-                                        return true;
                                     case ComponentParseResult.ParseFailure:
                                         bytesConsumed = 0;
                                         return false;
+                                    case ComponentParseResult.NoMoreData:
+                                        bytesConsumed = i;
+                                        return true;
                                     default:
-                                        this.Separators |= (uint)component3 << 8;
-                                        ComponentParseResult component4 = ParseComponent(source, false, ref srcIndex, out this.V5);
-                                        switch (component4)
+                                        Separators |= (uint)componentParseResult << 8;
+                                        componentParseResult = ParseComponent(source, neverParseAsFraction: false, ref i, out V5);
+                                        switch (componentParseResult)
                                         {
-                                            case ComponentParseResult.NoMoreData:
-                                                bytesConsumed = srcIndex;
-                                                return true;
                                             case ComponentParseResult.ParseFailure:
                                                 bytesConsumed = 0;
                                                 return false;
+                                            case ComponentParseResult.NoMoreData:
+                                                bytesConsumed = i;
+                                                return true;
                                             default:
-                                                this.Separators = (uint)((ComponentParseResult)this.Separators | component4);
-                                                if (srcIndex != source.Length && (source[srcIndex] == (byte)46 || source[srcIndex] == (byte)58))
+                                                Separators |= (uint)componentParseResult;
+                                                if (i != source.Length && (source[i] == 46 || source[i] == 58))
                                                 {
                                                     bytesConsumed = 0;
                                                     return false;
                                                 }
-                                                bytesConsumed = srcIndex;
+                                                bytesConsumed = i;
                                                 return true;
                                         }
                                 }
@@ -4160,35 +4153,37 @@ namespace System.Buffers.Text
             {
                 if (srcIndex == source.Length)
                 {
-                    value = 0U;
+                    value = 0u;
                     return ComponentParseResult.NoMoreData;
                 }
-                byte num = source[srcIndex];
-                if (num == (byte)58 || num == (byte)46 & neverParseAsFraction)
+                byte b = source[srcIndex];
+                if (b == 58 || (b == 46 && neverParseAsFraction))
                 {
-                    ++srcIndex;
-                    int bytesConsumed;
-                    if (!TryParseUInt32D(source.Slice(srcIndex), out value, out bytesConsumed))
+                    srcIndex++;
+                    if (!TryParseUInt32D(source.Slice(srcIndex), out value, out var bytesConsumed))
                     {
-                        value = 0U;
+                        value = 0u;
                         return ComponentParseResult.ParseFailure;
                     }
                     srcIndex += bytesConsumed;
-                    return num != (byte)58 ? ComponentParseResult.Period : ComponentParseResult.Colon;
+                    if (b != 58)
+                    {
+                        return ComponentParseResult.Period;
+                    }
+                    return ComponentParseResult.Colon;
                 }
-                if (num == (byte)46)
+                if (b == 46)
                 {
-                    ++srcIndex;
-                    int bytesConsumed;
-                    if (!TryParseTimeSpanFraction(source.Slice(srcIndex), out value, out bytesConsumed))
+                    srcIndex++;
+                    if (!TryParseTimeSpanFraction(source.Slice(srcIndex), out value, out var bytesConsumed2))
                     {
-                        value = 0U;
+                        value = 0u;
                         return ComponentParseResult.ParseFailure;
                     }
-                    srcIndex += bytesConsumed;
+                    srcIndex += bytesConsumed2;
                     return ComponentParseResult.Period;
                 }
-                value = 0U;
+                value = 0u;
                 return ComponentParseResult.NoMoreData;
             }
         }
