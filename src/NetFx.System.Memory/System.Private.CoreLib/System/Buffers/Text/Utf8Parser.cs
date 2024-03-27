@@ -9,6 +9,9 @@ using System.Runtime.CompilerServices;
 
 namespace System.Buffers.Text
 {
+    /// <summary>
+    /// Methods to parse common data types to Utf8 strings.
+    /// </summary>
     public static class Utf8Parser
     {
         private static readonly int[] s_daysToMonth365 = new int[13]

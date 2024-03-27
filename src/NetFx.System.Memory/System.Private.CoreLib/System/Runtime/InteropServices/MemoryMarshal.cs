@@ -5,15 +5,17 @@
 // Assembly location: F:\Users\shad\source\repos\CheckSystemMemoryDependencies\CheckSystemMemoryDependencies\bin\Debug\net45\System.Memory.dll
 
 using System.Buffers;
-using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
 using System.Runtime.CompilerServices;
 
 namespace System.Runtime.InteropServices
 {
+    /// <summary>
+    /// Provides a collection of methods for interoperating with <see cref="Memory{T}"/>, <see cref="ReadOnlyMemory{T}"/>,
+    /// <see cref="Span{T}"/>, and <see cref="ReadOnlySpan{T}"/>.
+    /// </summary>
     public static class MemoryMarshal
     {
         /// <summary>

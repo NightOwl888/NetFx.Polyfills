@@ -4,6 +4,7 @@
     <FileVersion>1.0.0</FileVersion>
     <InformationalVersion>1.0.0</InformationalVersion>
     <SignAssembly>false</SignAssembly>
+    <DocumentationFile>$(MSBuildThisFileDirectory)NetFx.System.Runtime.CompilerServices.Unsafe.xml</DocumentationFile>
   </PropertyGroup>
   
   <PropertyGroup>
@@ -34,6 +35,10 @@
 
   <ItemGroup>
     <Compile Include="System.Runtime.CompilerServices.Unsafe.il" />
+    <None Include="$(DocumentationFile)">
+      <Pack>true</Pack>
+      <PackagePath>lib/net40</PackagePath>
+    </None>
   </ItemGroup>
   
   <ItemGroup>

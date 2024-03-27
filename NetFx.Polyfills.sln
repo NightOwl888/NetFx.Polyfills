@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A6DF412F-8147-4D1F-B388-0B0284A55772}"
+	ProjectSection(SolutionItems) = preProject
+		src\Directory.Build.targets = src\Directory.Build.targets
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetFx.System.Runtime.CompilerServices.Unsafe", "src\NetFx.System.Runtime.CompilerServices.Unsafe\NetFx.System.Runtime.CompilerServices.Unsafe.ilproj", "{F79D5B6E-CE71-4ABE-ACB8-6385E8C91C63}"
 EndProject

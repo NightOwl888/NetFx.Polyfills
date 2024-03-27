@@ -372,6 +372,10 @@ namespace System
             return new ReadOnlySpan<T>(span._pinnable, span._byteOffset, span._length);
         }
 
+        /// <summary>
+        /// Returns the string representation of this <see cref="Span{T}"/> object.
+        /// </summary>
+        /// <returns>The string representation of this <see cref="Span{T}"/> object.</returns>
         public override unsafe string ToString()
         {
             if (typeof(T) == typeof(char))
