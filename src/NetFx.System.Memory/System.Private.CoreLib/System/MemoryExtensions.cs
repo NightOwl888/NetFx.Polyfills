@@ -207,8 +207,8 @@ namespace System
         {
             int length = span.Length;
             return default(T) != null && 
-                IsTypeComparableAsBytes<T>(out nuint size)
-                ? length == other.Length && SpanHelpers.SequenceEqual(ref Unsafe.As<T, byte>(ref MemoryMarshal.GetReference(span)), ref Unsafe.As<T, byte>(ref MemoryMarshal.GetReference(other)), (nuint)length * size)
+                IsTypeComparableAsBytes<T>(out NUInt size)
+                ? length == other.Length && SpanHelpers.SequenceEqual(ref Unsafe.As<T, byte>(ref MemoryMarshal.GetReference(span)), ref Unsafe.As<T, byte>(ref MemoryMarshal.GetReference(other)), (NUInt)length * size)
                 : length == other.Length && SpanHelpers.SequenceEqual(ref MemoryMarshal.GetReference(span), ref MemoryMarshal.GetReference(other), length);
         }
 
@@ -456,23 +456,22 @@ namespace System
         public static bool SequenceEqual<T>(this ReadOnlySpan<T> span, ReadOnlySpan<T> other) where T : IEquatable<T>
         {
             int length = span.Length;
-            T? t = default;
-            if (t == null || !IsTypeComparableAsBytes<T>(out nuint nUInt))
+            if (default(T) != null && IsTypeComparableAsBytes<T>(out var size))
             {
-                if (length != other.Length)
+                if (length == other.Length)
                 {
-                    return false;
+                    return SpanHelpers.SequenceEqual(ref Unsafe.As<T, byte>(ref MemoryMarshal.GetReference(span)), ref Unsafe.As<T, byte>(ref MemoryMarshal.GetReference(other)), (NUInt)length * size);
                 }
-                return SpanHelpers.SequenceEqual(
-                    ref MemoryMarshal.GetReference(span),
-                    ref MemoryMarshal.GetReference(other),
-                    length);
-            }
-            if (length != other.Length)
-            {
+
                 return false;
             }
-            return SpanHelpers.SequenceEqual(ref Unsafe.As<T, byte>(ref MemoryMarshal.GetReference(span)), ref Unsafe.As<T, byte>(ref MemoryMarshal.GetReference(other)), (nuint)length * nUInt);
+
+            if (length == other.Length)
+            {
+                return SpanHelpers.SequenceEqual(ref MemoryMarshal.GetReference(span), ref MemoryMarshal.GetReference(other), length);
+            }
+
+            return false;
         }
 
         /// <summary>
@@ -497,8 +496,8 @@ namespace System
         public static bool StartsWith<T>(this Span<T> span, ReadOnlySpan<T> value) where T : IEquatable<T>
         {
             int length = value.Length;
-            return default(T) != null && IsTypeComparableAsBytes<T>(out nuint size)
-                ? length <= span.Length && SpanHelpers.SequenceEqual(ref Unsafe.As<T, byte>(ref MemoryMarshal.GetReference(span)), ref Unsafe.As<T, byte>(ref MemoryMarshal.GetReference(value)), (nuint)length * size)
+            return default(T) != null && IsTypeComparableAsBytes<T>(out NUInt size)
+                ? length <= span.Length && SpanHelpers.SequenceEqual(ref Unsafe.As<T, byte>(ref MemoryMarshal.GetReference(span)), ref Unsafe.As<T, byte>(ref MemoryMarshal.GetReference(value)), (NUInt)length * size)
                 : length <= span.Length && SpanHelpers.SequenceEqual(ref MemoryMarshal.GetReference(span), ref MemoryMarshal.GetReference(value), length);
         }
 
@@ -509,8 +508,8 @@ namespace System
         public static bool StartsWith<T>(this ReadOnlySpan<T> span, ReadOnlySpan<T> value) where T : IEquatable<T>
         {
             int length = value.Length;
-            return default(T) != null && IsTypeComparableAsBytes<T>(out nuint size)
-                ? length <= span.Length && SpanHelpers.SequenceEqual(ref Unsafe.As<T, byte>(ref MemoryMarshal.GetReference(span)), ref Unsafe.As<T, byte>(ref MemoryMarshal.GetReference(value)), (nuint)length * size)
+            return default(T) != null && IsTypeComparableAsBytes<T>(out NUInt size)
+                ? length <= span.Length && SpanHelpers.SequenceEqual(ref Unsafe.As<T, byte>(ref MemoryMarshal.GetReference(span)), ref Unsafe.As<T, byte>(ref MemoryMarshal.GetReference(value)), (NUInt)length * size)
                 : length <= span.Length && SpanHelpers.SequenceEqual(ref MemoryMarshal.GetReference<T>(span), ref MemoryMarshal.GetReference(value), length);
         }
 
@@ -523,8 +522,8 @@ namespace System
             int length1 = span.Length;
             int length2 = value.Length;
             return default(T) != null &&
-                IsTypeComparableAsBytes<T>(out nuint size)
-                ? length2 <= length1 && SpanHelpers.SequenceEqual(ref Unsafe.As<T, byte>(ref Unsafe.Add(ref MemoryMarshal.GetReference(span), length1 - length2)), ref Unsafe.As<T, byte>(ref MemoryMarshal.GetReference(value)), (nuint)length2 * size)
+                IsTypeComparableAsBytes<T>(out NUInt size)
+                ? length2 <= length1 && SpanHelpers.SequenceEqual(ref Unsafe.As<T, byte>(ref Unsafe.Add(ref MemoryMarshal.GetReference(span), length1 - length2)), ref Unsafe.As<T, byte>(ref MemoryMarshal.GetReference(value)), (NUInt)length2 * size)
                 : length2 <= length1 && SpanHelpers.SequenceEqual(ref Unsafe.Add(ref MemoryMarshal.GetReference(span), length1 - length2), ref MemoryMarshal.GetReference(value), length2);
         }
 
@@ -534,12 +533,24 @@ namespace System
         //[MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool EndsWith<T>(this ReadOnlySpan<T> span, ReadOnlySpan<T> value) where T : IEquatable<T>
         {
-            int length1 = span.Length;
+            int length = span.Length;
             int length2 = value.Length;
-            return default(T) != null &&
-                IsTypeComparableAsBytes<T>(out nuint size)
-                ? length2 <= length1 && SpanHelpers.SequenceEqual(ref Unsafe.As<T, byte>(ref Unsafe.Add(ref MemoryMarshal.GetReference(span), length1 - length2)), ref Unsafe.As<T, byte>(ref MemoryMarshal.GetReference(value)), (nuint)length2 * size)
-                : length2 <= length1 && SpanHelpers.SequenceEqual(ref Unsafe.Add(ref MemoryMarshal.GetReference(span), length1 - length2), ref MemoryMarshal.GetReference(value), length2);
+            if (default(T) != null && IsTypeComparableAsBytes<T>(out NUInt size))
+            {
+                if (length2 <= length)
+                {
+                    return SpanHelpers.SequenceEqual(ref Unsafe.As<T, byte>(ref Unsafe.Add(ref MemoryMarshal.GetReference(span), length - length2)), ref Unsafe.As<T, byte>(ref MemoryMarshal.GetReference(value)), (NUInt)length2 * size);
+                }
+
+                return false;
+            }
+
+            if (length2 <= length)
+            {
+                return SpanHelpers.SequenceEqual(ref Unsafe.Add(ref MemoryMarshal.GetReference(span), length - length2), ref MemoryMarshal.GetReference(value), length2);
+            }
+
+            return false;
         }
 
         /// <summary>
@@ -1087,28 +1098,32 @@ namespace System
         }
 
         //[MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static bool IsTypeComparableAsBytes<T>(out nuint size)
+        private static bool IsTypeComparableAsBytes<T>(out NUInt size)
         {
             if (typeof(T) == typeof(byte) || typeof(T) == typeof(sbyte))
             {
-                size = 1;
+                size = (NUInt)1;
                 return true;
             }
+
             if (typeof(T) == typeof(char) || typeof(T) == typeof(short) || typeof(T) == typeof(ushort))
             {
-                size = 2;
+                size = (NUInt)2;
                 return true;
             }
+
             if (typeof(T) == typeof(int) || typeof(T) == typeof(uint))
             {
-                size = 4;
+                size = (NUInt)4;
                 return true;
             }
+
             if (typeof(T) == typeof(long) || typeof(T) == typeof(ulong))
             {
-                size = 8;
+                size = (NUInt)8;
                 return true;
             }
+
             size = default;
             return false;
         }

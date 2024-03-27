@@ -40,7 +40,7 @@ namespace System
                 if (SequenceEqual(
                     ref Unsafe.As<char, byte>(ref Unsafe.Add(ref searchSpace, index + 1)),
                     ref Unsafe.As<char, byte>(ref valueTail),
-                    (nuint)(uint)valueTailLength * 2))
+                    (NUInt)(uint)valueTailLength * 2))
                 {
                     return index;  // The tail matched. Return a successful find.
                 }

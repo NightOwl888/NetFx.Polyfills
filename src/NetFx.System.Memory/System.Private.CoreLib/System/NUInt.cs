@@ -4,6 +4,7 @@
 // MVID: 866AE087-4753-44D8-B4C3-B8D9EAD86168
 // Assembly location: F:\Users\shad\source\repos\CheckSystemMemoryDependencies\CheckSystemMemoryDependencies\bin\Debug\net45\System.Memory.dll
 
+using System;
 using System.Runtime.CompilerServices;
 
 namespace System
@@ -43,9 +44,20 @@ namespace System
         }
 
         //[MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static unsafe NUInt operator *(NUInt left, NUInt right)
+        public unsafe static NUInt operator *(NUInt left, NUInt right)
         {
-            return sizeof(IntPtr) != 4 ? new NUInt((ulong)left._value * (ulong)right._value) : new NUInt((uint)left._value * (uint)right._value);
+            if (sizeof(IntPtr) != 4)
+            {
+                return new NUInt((ulong)left._value * (ulong)right._value);
+            }
+
+            return new NUInt((uint)((int)left._value * (int)right._value));
+        }
+
+        // NetFx: Added so we can pass to Unsafe
+        public static unsafe implicit operator nuint(NUInt value)
+        {
+            return (nuint)value._value;
         }
     }
 }
