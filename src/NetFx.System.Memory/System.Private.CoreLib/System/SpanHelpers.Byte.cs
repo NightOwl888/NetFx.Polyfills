@@ -211,7 +211,7 @@ namespace System
             Debug.Assert(valueLength >= 0);
 
             if (valueLength == 0)
-                return searchSpaceLength;  // A zero-length sequence is always treated as "found" at the end of the search space.
+                return 0; // NetFx: Note this differs in behavior from later versions of .NET core
 
             byte valueHead = value;
             ref byte valueTail = ref Unsafe.Add(ref value, 1);
