@@ -2,9 +2,9 @@
 // Type: System.Number
 // Assembly: System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51
 // MVID: 866AE087-4753-44D8-B4C3-B8D9EAD86168
-// Assembly location: F:\Users\shad\source\repos\CheckSystemMemoryDependencies\CheckSystemMemoryDependencies\bin\Debug\net45\System.Memory.dll
 
 using System.Buffers.Text;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 
 namespace System
@@ -189,66 +189,145 @@ namespace System
             return true;
         }
 
-        public static unsafe bool NumberBufferToDecimal(ref NumberBuffer number, ref Decimal value)
+        internal const int DecimalPrecision = 29;
+        public static unsafe bool NumberBufferToDecimal(ref NumberBuffer number, ref decimal value)
         {
-            MutableDecimal source = new MutableDecimal();
-            byte* unsafeDigits = number.UnsafeDigits;
-            int num1 = number.Scale;
-            if (*unsafeDigits == (byte)0)
+            number.CheckConsistency();
+
+            byte* p = number.UnsafeDigits;
+            int e = number.Scale;
+            bool sign = number.IsNegative;
+            uint c = *p;
+            if (c == 0)
             {
-                if (num1 > 0)
-                    num1 = 0;
+                // To avoid risking an app-compat issue with pre 4.5 (where some app was illegally using Reflection to examine the internal scale bits), we'll only force
+                // the scale to 0 if the scale was previously positive (previously, such cases were unparsable to a bug.)
+                value = new decimal(0, 0, 0, sign, (byte)Clamp(-e, 0, 28));
+                return true;
             }
-            else
-            {
-                if (num1 > 29)
-                    return false;
-                for (; (num1 > 0 || *unsafeDigits != (byte)0 && num1 > -28) && (source.High < 429496729U || source.High == 429496729U && (source.Mid < 2576980377U || source.Mid == 2576980377U && (source.Low < 2576980377U || source.Low == 2576980377U && *unsafeDigits <= (byte)53))); --num1)
-                {
-                    DecimalDecCalc.DecMul10(ref source);
-                    if (*unsafeDigits != (byte)0)
-                        DecimalDecCalc.DecAddInt32(ref source, (uint)*unsafeDigits++ - 48U);
-                }
-                byte* numPtr1 = unsafeDigits;
-                byte* numPtr2 = numPtr1 + 1;
-                if (*numPtr1 >= (byte)53)
-                {
-                    bool flag = true;
-                    if (*(numPtr2 - 1) == (byte)53 && (int)*(numPtr2 - 2) % 2 == 0)
-                    {
-                        int num2;
-                        for (num2 = 20; *numPtr2 == (byte)48 && num2 != 0; --num2)
-                            ++numPtr2;
-                        if (*numPtr2 == (byte)0 || num2 == 0)
-                            flag = false;
-                    }
-                    if (flag)
-                    {
-                        DecimalDecCalc.DecAddInt32(ref source, 1U);
-                        if (((int)source.High | (int)source.Mid | (int)source.Low) == 0)
-                        {
-                            source.High = 429496729U;
-                            source.Mid = 2576980377U;
-                            source.Low = 2576980378U;
-                            ++num1;
-                        }
-                    }
-                }
-            }
-            if (num1 > 0)
+
+            if (e > DecimalPrecision)
                 return false;
-            if (num1 <= -29)
+
+            ulong low64 = 0;
+            while (e > -28)
             {
-                source.High = 0U;
-                source.Low = 0U;
-                source.Mid = 0U;
-                source.Scale = 28;
+                e--;
+                low64 *= 10;
+                low64 += c - '0';
+                c = *++p;
+                if (low64 >= ulong.MaxValue / 10)
+                    break;
+                if (c == 0)
+                {
+                    while (e > 0)
+                    {
+                        e--;
+                        low64 *= 10;
+                        if (low64 >= ulong.MaxValue / 10)
+                            break;
+                    }
+                    break;
+                }
+            }
+
+            uint high = 0;
+            while ((e > 0 || (c != 0 && e > -28)) &&
+              (high < uint.MaxValue / 10 || (high == uint.MaxValue / 10 && (low64 < 0x99999999_99999999 || (low64 == 0x99999999_99999999 && c <= '5')))))
+            {
+                // multiply by 10
+                ulong tmpLow = (uint)low64 * 10UL;
+                ulong tmp64 = (uint)(low64 >> 32) * 10UL + (tmpLow >> 32);
+                low64 = (uint)tmpLow + (tmp64 << 32);
+                high = (uint)(tmp64 >> 32) + high * 10;
+
+                if (c != 0)
+                {
+                    c -= '0';
+                    low64 += c;
+                    if (low64 < c)
+                        high++;
+                    c = *++p;
+                }
+                e--;
+            }
+
+            if (c >= '5')
+            {
+                if ((c == '5') && ((low64 & 1) == 0))
+                {
+                    c = *++p;
+
+                    bool hasZeroTail = !number.HasNonZeroTail;
+
+                    // We might still have some additional digits, in which case they need
+                    // to be considered as part of hasZeroTail. Some examples of this are:
+                    //  * 3.0500000000000000000001e-27
+                    //  * 3.05000000000000000000001e-27
+                    // In these cases, we will have processed 3 and 0, and ended on 5. The
+                    // buffer, however, will still contain a number of trailing zeros and
+                    // a trailing non-zero number.
+
+                    while ((c != 0) && hasZeroTail)
+                    {
+                        hasZeroTail &= (c == '0');
+                        c = *++p;
+                    }
+
+                    // We should either be at the end of the stream or have a non-zero tail
+                    Debug.Assert((c == 0) || !hasZeroTail);
+
+                    if (hasZeroTail)
+                    {
+                        // When the next digit is 5, the number is even, and all following
+                        // digits are zero we don't need to round.
+                        goto NoRounding;
+                    }
+                }
+
+                if (++low64 == 0 && ++high == 0)
+                {
+                    low64 = 0x99999999_9999999A;
+                    high = uint.MaxValue / 10;
+                    e++;
+                }
+            }
+        NoRounding:
+
+            if (e > 0)
+                return false;
+
+            if (e <= -DecimalPrecision)
+            {
+                // Parsing a large scale zero can give you more precision than fits in the decimal.
+                // This should only happen for actual zeros or very small numbers that round to zero.
+                value = new decimal(0, 0, 0, sign, DecimalPrecision - 1);
             }
             else
-                source.Scale = -num1;
-            source.IsNegative = number.IsNegative;
-            value = Unsafe.As<MutableDecimal, Decimal>(ref source);
+            {
+                value = new decimal((int)low64, (int)(low64 >> 32), (int)high, sign, (byte)-e);
+            }
             return true;
+        }
+
+        //[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int Clamp(int value, int min, int max)
+        {
+            if (min > max)
+            {
+                throw new ArgumentException(SR2.Format(SR.Argument_MinMaxValue, min, max));
+            }
+
+            if (value < min)
+            {
+                return min;
+            }
+            else if (value > max)
+            {
+                return max;
+            }
+
+            return value;
         }
 
         public static void DecimalToNumber(decimal value, ref NumberBuffer number)

@@ -106,6 +106,15 @@ namespace System {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; cannot be greater than {1}..
+        /// </summary>
+        internal static string Argument_MinMaxValue {
+            get {
+                return ResourceManager.GetString("Argument_MinMaxValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Overlapping spans have mismatching alignment..
         /// </summary>
         internal static string Argument_OverlapAlignmentMismatch {
