@@ -19,6 +19,7 @@ namespace System.Buffers.ArrayPool.Tests
             public const int BufferTrimPoll = 5;
         }
 
+        // NetFx: Remote listener not implemented
         //protected static int RunWithListener(Action body, EventLevel level, Action<EventWrittenEventArgs> callback)
         //{
         //    using (TestEventListener listener = new TestEventListener("System.Buffers.ArrayPoolEventSource", level))
@@ -33,6 +34,7 @@ namespace System.Buffers.ArrayPool.Tests
         //    }
         //}
 
+        // NetFx: Remote invoker not implemented
         //protected static void RemoteInvokeWithTrimming(Action method, int timeout = RemoteExecutor.FailWaitTimeoutMilliseconds)
         //{
         //    var options = new RemoteInvokeOptions
