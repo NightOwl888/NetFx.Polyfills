@@ -5,8 +5,6 @@
 using System.Buffers;
 using System.Collections.Generic;
 using System.Linq;
-using System.MemoryTests;
-using System.Text;
 
 namespace System.Memory.Tests
 {

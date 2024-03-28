@@ -8,7 +8,6 @@
 
 using System.Buffers.Binary;
 using System.Globalization;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 namespace System.Buffers.Text

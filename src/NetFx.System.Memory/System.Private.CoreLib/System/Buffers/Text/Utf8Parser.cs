@@ -7,7 +7,6 @@
 // MVID: 866AE087-4753-44D8-B4C3-B8D9EAD86168
 
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 
 namespace System.Buffers.Text

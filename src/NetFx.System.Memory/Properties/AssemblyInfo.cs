@@ -3,7 +3,6 @@ using System.Diagnostics;
 using System.Reflection;
 using System.Resources;
 using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
 
 //[assembly: AssemblyCompany("Microsoft Corporation")]
 [assembly: AssemblyCopyright("© Microsoft Corporation. All rights reserved.")]

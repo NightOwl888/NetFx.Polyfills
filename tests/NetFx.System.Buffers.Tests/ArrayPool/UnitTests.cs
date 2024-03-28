@@ -1,10 +1,7 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Diagnostics.Tracing;
-using System.Linq;
 using System.Numerics;
 using System.Threading.Tasks;
 //using Microsoft.DotNet.RemoteExecutor;
@@ -289,8 +286,7 @@ namespace System.Buffers.ArrayPool.Tests
         [InlineData(1024, 1024)]
         [InlineData(4096, 4096)]
         [InlineData(1024 * 1024, 1024 * 1024)]
-        // FxNet TODO: This test is failing, but it also fails on the
-        // official release of System.Memory.
+        // FxNet: This test fails System.Memory.4.5.5
         //[InlineData(1024 * 1024 + 1, 1024 * 1024 * 2)]
         [InlineData(1024 * 1024 * 2, 1024 * 1024 * 2)]
         public static void RentingSpecificLengthsYieldsExpectedLengths(int requestedMinimum, int expectedLength)
