@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Numerics;
+﻿using System.Diagnostics;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace System
 {
@@ -96,45 +90,6 @@ namespace System
             return -1;
         }
 
-        //public static int IndexOf<T>(
-        //  ref T searchSpace,
-        //  int searchSpaceLength,
-        //  ref T value,
-        //  int valueLength)
-        //  where T : IEquatable<T>
-        //{
-        //    if (valueLength == 0)
-        //        return 0;
-        //    T obj = value;
-        //    ref T local = ref Unsafe.Add<T>(ref value, 1);
-        //    int length1 = valueLength - 1;
-        //    int elementOffset = 0;
-        //    int num1;
-        //    while (true)
-        //    {
-        //        int length2 = searchSpaceLength - elementOffset - length1;
-        //        if (length2 > 0)
-        //        {
-        //            int num2 = SpanHelpers.IndexOf<T>(ref Unsafe.Add<T>(ref searchSpace, elementOffset), obj, length2);
-        //            if (num2 != -1)
-        //            {
-        //                num1 = elementOffset + num2;
-        //                if (!SpanHelpers.SequenceEqual<T>(ref Unsafe.Add<T>(ref searchSpace, num1 + 1), ref local, length1))
-        //                    elementOffset = num1 + 1;
-        //                else
-        //                    break;
-        //            }
-        //            else
-        //                goto label_8;
-        //        }
-        //        else
-        //            goto label_8;
-        //    }
-        //    return num1;
-        //label_8:
-        //    return -1;
-        //}
-
         public static unsafe int IndexOf<T>(ref T searchSpace, T value, int length) where T : IEquatable<T>
         {
             Debug.Assert(length >= 0);
@@ -221,84 +176,6 @@ namespace System
         Found7:
             return (int)(index + 7);
         }
-
-        //public static unsafe int IndexOf<T>(ref T searchSpace, T value, int length) where T : IEquatable<T>
-        //{
-        //    IntPtr elementOffset = (IntPtr)0;
-        //    while (length >= 8)
-        //    {
-        //        length -= 8;
-        //        if (!value.Equals(Unsafe.Add<T>(ref searchSpace, elementOffset)))
-        //        {
-        //            if (!value.Equals(Unsafe.Add<T>(ref searchSpace, elementOffset + 1)))
-        //            {
-        //                if (!value.Equals(Unsafe.Add<T>(ref searchSpace, elementOffset + 2)))
-        //                {
-        //                    if (!value.Equals(Unsafe.Add<T>(ref searchSpace, elementOffset + 3)))
-        //                    {
-        //                        if (value.Equals(Unsafe.Add<T>(ref searchSpace, elementOffset + 4)))
-        //                            return (int)(void*)(elementOffset + 4);
-        //                        if (value.Equals(Unsafe.Add<T>(ref searchSpace, elementOffset + 5)))
-        //                            return (int)(void*)(elementOffset + 5);
-        //                        if (value.Equals(Unsafe.Add<T>(ref searchSpace, elementOffset + 6)))
-        //                            return (int)(void*)(elementOffset + 6);
-        //                        if (value.Equals(Unsafe.Add<T>(ref searchSpace, elementOffset + 7)))
-        //                            return (int)(void*)(elementOffset + 7);
-        //                        elementOffset += 8;
-        //                    }
-        //                    else
-        //                        goto label_24;
-        //                }
-        //                else
-        //                    goto label_23;
-        //            }
-        //            else
-        //                goto label_22;
-        //        }
-        //        else
-        //            goto label_21;
-        //    }
-        //    if (length >= 4)
-        //    {
-        //        length -= 4;
-        //        if (!value.Equals(Unsafe.Add<T>(ref searchSpace, elementOffset)))
-        //        {
-        //            if (!value.Equals(Unsafe.Add<T>(ref searchSpace, elementOffset + 1)))
-        //            {
-        //                if (!value.Equals(Unsafe.Add<T>(ref searchSpace, elementOffset + 2)))
-        //                {
-        //                    if (!value.Equals(Unsafe.Add<T>(ref searchSpace, elementOffset + 3)))
-        //                        elementOffset += 4;
-        //                    else
-        //                        goto label_24;
-        //                }
-        //                else
-        //                    goto label_23;
-        //            }
-        //            else
-        //                goto label_22;
-        //        }
-        //        else
-        //            goto label_21;
-        //    }
-        //    for (; length > 0; --length)
-        //    {
-        //        if (!value.Equals(Unsafe.Add<T>(ref searchSpace, elementOffset)))
-        //            elementOffset += 1;
-        //        else
-        //            goto label_21;
-        //    }
-        //    return -1;
-        //label_21:
-        //    return (int)(void*)elementOffset;
-        //label_22:
-        //    return (int)(void*)(elementOffset + 1);
-        //label_23:
-        //    return (int)(void*)(elementOffset + 2);
-        //label_24:
-        //    return (int)(void*)(elementOffset + 3);
-        //}
-
 
         public static int IndexOfAny<T>(ref T searchSpace, T value0, T value1, int length) where T : IEquatable<T>
         {
@@ -404,92 +281,6 @@ namespace System
             return index + 7;
         }
 
-        //public static int IndexOfAny<T>(ref T searchSpace, T value0, T value1, int length) where T : IEquatable<T>
-        //{
-        //    int elementOffset;
-        //    for (elementOffset = 0; length - elementOffset >= 8; elementOffset += 8)
-        //    {
-        //        T other1 = Unsafe.Add<T>(ref searchSpace, elementOffset);
-        //        if (!value0.Equals(other1) && !value1.Equals(other1))
-        //        {
-        //            T other2 = Unsafe.Add<T>(ref searchSpace, elementOffset + 1);
-        //            if (!value0.Equals(other2) && !value1.Equals(other2))
-        //            {
-        //                T other3 = Unsafe.Add<T>(ref searchSpace, elementOffset + 2);
-        //                if (!value0.Equals(other3) && !value1.Equals(other3))
-        //                {
-        //                    T other4 = Unsafe.Add<T>(ref searchSpace, elementOffset + 3);
-        //                    if (!value0.Equals(other4) && !value1.Equals(other4))
-        //                    {
-        //                        T other5 = Unsafe.Add<T>(ref searchSpace, elementOffset + 4);
-        //                        if (value0.Equals(other5) || value1.Equals(other5))
-        //                            return elementOffset + 4;
-        //                        T other6 = Unsafe.Add<T>(ref searchSpace, elementOffset + 5);
-        //                        if (value0.Equals(other6) || value1.Equals(other6))
-        //                            return elementOffset + 5;
-        //                        T other7 = Unsafe.Add<T>(ref searchSpace, elementOffset + 6);
-        //                        if (value0.Equals(other7) || value1.Equals(other7))
-        //                            return elementOffset + 6;
-        //                        T other8 = Unsafe.Add<T>(ref searchSpace, elementOffset + 7);
-        //                        if (value0.Equals(other8) || value1.Equals(other8))
-        //                            return elementOffset + 7;
-        //                    }
-        //                    else
-        //                        goto label_24;
-        //                }
-        //                else
-        //                    goto label_23;
-        //            }
-        //            else
-        //                goto label_22;
-        //        }
-        //        else
-        //            goto label_21;
-        //    }
-        //    if (length - elementOffset >= 4)
-        //    {
-        //        T other1 = Unsafe.Add<T>(ref searchSpace, elementOffset);
-        //        if (!value0.Equals(other1) && !value1.Equals(other1))
-        //        {
-        //            T other2 = Unsafe.Add<T>(ref searchSpace, elementOffset + 1);
-        //            if (!value0.Equals(other2) && !value1.Equals(other2))
-        //            {
-        //                T other3 = Unsafe.Add<T>(ref searchSpace, elementOffset + 2);
-        //                if (!value0.Equals(other3) && !value1.Equals(other3))
-        //                {
-        //                    T other4 = Unsafe.Add<T>(ref searchSpace, elementOffset + 3);
-        //                    if (!value0.Equals(other4) && !value1.Equals(other4))
-        //                        elementOffset += 4;
-        //                    else
-        //                        goto label_24;
-        //                }
-        //                else
-        //                    goto label_23;
-        //            }
-        //            else
-        //                goto label_22;
-        //        }
-        //        else
-        //            goto label_21;
-        //    }
-        //    for (; elementOffset < length; ++elementOffset)
-        //    {
-        //        T other = Unsafe.Add<T>(ref searchSpace, elementOffset);
-        //        if (value0.Equals(other) || value1.Equals(other))
-        //            goto label_21;
-        //    }
-        //    return -1;
-        //label_21:
-        //    return elementOffset;
-        //label_22:
-        //    return elementOffset + 1;
-        //label_23:
-        //    return elementOffset + 2;
-        //label_24:
-        //    return elementOffset + 3;
-        //}
-
-
         public static int IndexOfAny<T>(ref T searchSpace, T value0, T value1, T value2, int length) where T : IEquatable<T>
         {
             Debug.Assert(length >= 0);
@@ -593,91 +384,6 @@ namespace System
             return index + 7;
         }
 
-        //public static int IndexOfAny<T>(ref T searchSpace, T value0, T value1, T value2, int length) where T : IEquatable<T>
-        //{
-        //    int elementOffset;
-        //    for (elementOffset = 0; length - elementOffset >= 8; elementOffset += 8)
-        //    {
-        //        T other1 = Unsafe.Add<T>(ref searchSpace, elementOffset);
-        //        if (!value0.Equals(other1) && !value1.Equals(other1) && !value2.Equals(other1))
-        //        {
-        //            T other2 = Unsafe.Add<T>(ref searchSpace, elementOffset + 1);
-        //            if (!value0.Equals(other2) && !value1.Equals(other2) && !value2.Equals(other2))
-        //            {
-        //                T other3 = Unsafe.Add<T>(ref searchSpace, elementOffset + 2);
-        //                if (!value0.Equals(other3) && !value1.Equals(other3) && !value2.Equals(other3))
-        //                {
-        //                    T other4 = Unsafe.Add<T>(ref searchSpace, elementOffset + 3);
-        //                    if (!value0.Equals(other4) && !value1.Equals(other4) && !value2.Equals(other4))
-        //                    {
-        //                        T other5 = Unsafe.Add<T>(ref searchSpace, elementOffset + 4);
-        //                        if (value0.Equals(other5) || value1.Equals(other5) || value2.Equals(other5))
-        //                            return elementOffset + 4;
-        //                        T other6 = Unsafe.Add<T>(ref searchSpace, elementOffset + 5);
-        //                        if (value0.Equals(other6) || value1.Equals(other6) || value2.Equals(other6))
-        //                            return elementOffset + 5;
-        //                        T other7 = Unsafe.Add<T>(ref searchSpace, elementOffset + 6);
-        //                        if (value0.Equals(other7) || value1.Equals(other7) || value2.Equals(other7))
-        //                            return elementOffset + 6;
-        //                        T other8 = Unsafe.Add<T>(ref searchSpace, elementOffset + 7);
-        //                        if (value0.Equals(other8) || value1.Equals(other8) || value2.Equals(other8))
-        //                            return elementOffset + 7;
-        //                    }
-        //                    else
-        //                        goto label_24;
-        //                }
-        //                else
-        //                    goto label_23;
-        //            }
-        //            else
-        //                goto label_22;
-        //        }
-        //        else
-        //            goto label_21;
-        //    }
-        //    if (length - elementOffset >= 4)
-        //    {
-        //        T other1 = Unsafe.Add<T>(ref searchSpace, elementOffset);
-        //        if (!value0.Equals(other1) && !value1.Equals(other1) && !value2.Equals(other1))
-        //        {
-        //            T other2 = Unsafe.Add<T>(ref searchSpace, elementOffset + 1);
-        //            if (!value0.Equals(other2) && !value1.Equals(other2) && !value2.Equals(other2))
-        //            {
-        //                T other3 = Unsafe.Add<T>(ref searchSpace, elementOffset + 2);
-        //                if (!value0.Equals(other3) && !value1.Equals(other3) && !value2.Equals(other3))
-        //                {
-        //                    T other4 = Unsafe.Add<T>(ref searchSpace, elementOffset + 3);
-        //                    if (!value0.Equals(other4) && !value1.Equals(other4) && !value2.Equals(other4))
-        //                        elementOffset += 4;
-        //                    else
-        //                        goto label_24;
-        //                }
-        //                else
-        //                    goto label_23;
-        //            }
-        //            else
-        //                goto label_22;
-        //        }
-        //        else
-        //            goto label_21;
-        //    }
-        //    for (; elementOffset < length; ++elementOffset)
-        //    {
-        //        T other = Unsafe.Add<T>(ref searchSpace, elementOffset);
-        //        if (value0.Equals(other) || value1.Equals(other) || value2.Equals(other))
-        //            goto label_21;
-        //    }
-        //    return -1;
-        //label_21:
-        //    return elementOffset;
-        //label_22:
-        //    return elementOffset + 1;
-        //label_23:
-        //    return elementOffset + 2;
-        //label_24:
-        //    return elementOffset + 3;
-        //}
-
         public static int IndexOfAny<T>(ref T searchSpace, int searchSpaceLength, ref T value, int valueLength) where T : IEquatable<T>
         {
             Debug.Assert(searchSpaceLength >= 0);
@@ -749,31 +455,6 @@ namespace System
             return -1; // not found
         }
 
-        //public static int IndexOfAny<T>(
-        //  ref T searchSpace,
-        //  int searchSpaceLength,
-        //  ref T value,
-        //  int valueLength)
-        //  where T : IEquatable<T>
-        //{
-        //    if (valueLength == 0)
-        //        return 0;
-        //    int num1 = -1;
-        //    for (int elementOffset = 0; elementOffset < valueLength; ++elementOffset)
-        //    {
-        //        int num2 = SpanHelpers.IndexOf<T>(ref searchSpace, Unsafe.Add<T>(ref value, elementOffset), searchSpaceLength);
-        //        if ((uint)num2 < (uint)num1)
-        //        {
-        //            num1 = num2;
-        //            searchSpaceLength = num2;
-        //            if (num1 == 0)
-        //                break;
-        //        }
-        //    }
-        //    return num1;
-        //}
-
-
         public static int LastIndexOf<T>(ref T searchSpace, int searchSpaceLength, ref T value, int valueLength) where T : IEquatable<T>
         {
             Debug.Assert(searchSpaceLength >= 0);
@@ -807,46 +488,6 @@ namespace System
             }
             return -1;
         }
-
-
-        //public static int LastIndexOf<T>(
-        //  ref T searchSpace,
-        //  int searchSpaceLength,
-        //  ref T value,
-        //  int valueLength)
-        //  where T : IEquatable<T>
-        //{
-        //    if (valueLength == 0)
-        //        return 0;
-        //    T obj = value;
-        //    ref T local = ref Unsafe.Add<T>(ref value, 1);
-        //    int length1 = valueLength - 1;
-        //    int num1 = 0;
-        //    int num2;
-        //    while (true)
-        //    {
-        //        int length2 = searchSpaceLength - num1 - length1;
-        //        if (length2 > 0)
-        //        {
-        //            num2 = SpanHelpers.LastIndexOf<T>(ref searchSpace, obj, length2);
-        //            if (num2 != -1)
-        //            {
-        //                if (!SpanHelpers.SequenceEqual<T>(ref Unsafe.Add<T>(ref searchSpace, num2 + 1), ref local, length1))
-        //                    num1 += length2 - num2;
-        //                else
-        //                    break;
-        //            }
-        //            else
-        //                goto label_8;
-        //        }
-        //        else
-        //            goto label_8;
-        //    }
-        //    return num2;
-        //label_8:
-        //    return -1;
-        //}
-
 
         public static int LastIndexOf<T>(ref T searchSpace, T value, int length) where T : IEquatable<T>
         {
@@ -928,77 +569,6 @@ namespace System
         Found7:
             return length + 7;
         }
-
-
-
-        //public static int LastIndexOf<T>(ref T searchSpace, T value, int length) where T : IEquatable<T>
-        //{
-        //    while (length >= 8)
-        //    {
-        //        length -= 8;
-        //        if (value.Equals(Unsafe.Add<T>(ref searchSpace, length + 7)))
-        //            return length + 7;
-        //        if (value.Equals(Unsafe.Add<T>(ref searchSpace, length + 6)))
-        //            return length + 6;
-        //        if (value.Equals(Unsafe.Add<T>(ref searchSpace, length + 5)))
-        //            return length + 5;
-        //        if (value.Equals(Unsafe.Add<T>(ref searchSpace, length + 4)))
-        //            return length + 4;
-        //        if (!value.Equals(Unsafe.Add<T>(ref searchSpace, length + 3)))
-        //        {
-        //            if (!value.Equals(Unsafe.Add<T>(ref searchSpace, length + 2)))
-        //            {
-        //                if (!value.Equals(Unsafe.Add<T>(ref searchSpace, length + 1)))
-        //                {
-        //                    if (value.Equals(Unsafe.Add<T>(ref searchSpace, length)))
-        //                        goto label_18;
-        //                }
-        //                else
-        //                    goto label_19;
-        //            }
-        //            else
-        //                goto label_20;
-        //        }
-        //        else
-        //            goto label_21;
-        //    }
-        //    if (length >= 4)
-        //    {
-        //        length -= 4;
-        //        if (!value.Equals(Unsafe.Add<T>(ref searchSpace, length + 3)))
-        //        {
-        //            if (!value.Equals(Unsafe.Add<T>(ref searchSpace, length + 2)))
-        //            {
-        //                if (!value.Equals(Unsafe.Add<T>(ref searchSpace, length + 1)))
-        //                {
-        //                    if (value.Equals(Unsafe.Add<T>(ref searchSpace, length)))
-        //                        goto label_18;
-        //                }
-        //                else
-        //                    goto label_19;
-        //            }
-        //            else
-        //                goto label_20;
-        //        }
-        //        else
-        //            goto label_21;
-        //    }
-        //    while (length > 0)
-        //    {
-        //        --length;
-        //        if (value.Equals(Unsafe.Add<T>(ref searchSpace, length)))
-        //            goto label_18;
-        //    }
-        //    return -1;
-        //label_18:
-        //    return length;
-        //label_19:
-        //    return length + 1;
-        //label_20:
-        //    return length + 2;
-        //label_21:
-        //    return length + 3;
-        //}
 
         public static int LastIndexOfAny<T>(ref T searchSpace, T value0, T value1, int length) where T : IEquatable<T>
         {
@@ -1103,89 +673,6 @@ namespace System
             return length + 7;
         }
 
-        //public static int LastIndexOfAny<T>(ref T searchSpace, T value0, T value1, int length) where T : IEquatable<T>
-        //{
-        //    while (length >= 8)
-        //    {
-        //        length -= 8;
-        //        T other1 = Unsafe.Add<T>(ref searchSpace, length + 7);
-        //        if (value0.Equals(other1) || value1.Equals(other1))
-        //            return length + 7;
-        //        T other2 = Unsafe.Add<T>(ref searchSpace, length + 6);
-        //        if (value0.Equals(other2) || value1.Equals(other2))
-        //            return length + 6;
-        //        T other3 = Unsafe.Add<T>(ref searchSpace, length + 5);
-        //        if (value0.Equals(other3) || value1.Equals(other3))
-        //            return length + 5;
-        //        T other4 = Unsafe.Add<T>(ref searchSpace, length + 4);
-        //        if (value0.Equals(other4) || value1.Equals(other4))
-        //            return length + 4;
-        //        T other5 = Unsafe.Add<T>(ref searchSpace, length + 3);
-        //        if (!value0.Equals(other5) && !value1.Equals(other5))
-        //        {
-        //            T other6 = Unsafe.Add<T>(ref searchSpace, length + 2);
-        //            if (!value0.Equals(other6) && !value1.Equals(other6))
-        //            {
-        //                T other7 = Unsafe.Add<T>(ref searchSpace, length + 1);
-        //                if (!value0.Equals(other7) && !value1.Equals(other7))
-        //                {
-        //                    T other8 = Unsafe.Add<T>(ref searchSpace, length);
-        //                    if (value0.Equals(other8) || value1.Equals(other8))
-        //                        goto label_18;
-        //                }
-        //                else
-        //                    goto label_19;
-        //            }
-        //            else
-        //                goto label_20;
-        //        }
-        //        else
-        //            goto label_21;
-        //    }
-        //    if (length >= 4)
-        //    {
-        //        length -= 4;
-        //        T other1 = Unsafe.Add<T>(ref searchSpace, length + 3);
-        //        if (!value0.Equals(other1) && !value1.Equals(other1))
-        //        {
-        //            T other2 = Unsafe.Add<T>(ref searchSpace, length + 2);
-        //            if (!value0.Equals(other2) && !value1.Equals(other2))
-        //            {
-        //                T other3 = Unsafe.Add<T>(ref searchSpace, length + 1);
-        //                if (!value0.Equals(other3) && !value1.Equals(other3))
-        //                {
-        //                    T other4 = Unsafe.Add<T>(ref searchSpace, length);
-        //                    if (value0.Equals(other4) || value1.Equals(other4))
-        //                        goto label_18;
-        //                }
-        //                else
-        //                    goto label_19;
-        //            }
-        //            else
-        //                goto label_20;
-        //        }
-        //        else
-        //            goto label_21;
-        //    }
-        //    while (length > 0)
-        //    {
-        //        --length;
-        //        T other = Unsafe.Add<T>(ref searchSpace, length);
-        //        if (value0.Equals(other) || value1.Equals(other))
-        //            goto label_18;
-        //    }
-        //    return -1;
-        //label_18:
-        //    return length;
-        //label_19:
-        //    return length + 1;
-        //label_20:
-        //    return length + 2;
-        //label_21:
-        //    return length + 3;
-        //}
-
-
         public static int LastIndexOfAny<T>(ref T searchSpace, T value0, T value1, T value2, int length) where T : IEquatable<T>
         {
             Debug.Assert(length >= 0);
@@ -1289,94 +776,6 @@ namespace System
             return length + 7;
         }
 
-        //public static int LastIndexOfAny<T>(
-        //  ref T searchSpace,
-        //  T value0,
-        //  T value1,
-        //  T value2,
-        //  int length)
-        //  where T : IEquatable<T>
-        //{
-        //    while (length >= 8)
-        //    {
-        //        length -= 8;
-        //        T other1 = Unsafe.Add<T>(ref searchSpace, length + 7);
-        //        if (value0.Equals(other1) || value1.Equals(other1) || value2.Equals(other1))
-        //            return length + 7;
-        //        T other2 = Unsafe.Add<T>(ref searchSpace, length + 6);
-        //        if (value0.Equals(other2) || value1.Equals(other2) || value2.Equals(other2))
-        //            return length + 6;
-        //        T other3 = Unsafe.Add<T>(ref searchSpace, length + 5);
-        //        if (value0.Equals(other3) || value1.Equals(other3) || value2.Equals(other3))
-        //            return length + 5;
-        //        T other4 = Unsafe.Add<T>(ref searchSpace, length + 4);
-        //        if (value0.Equals(other4) || value1.Equals(other4) || value2.Equals(other4))
-        //            return length + 4;
-        //        T other5 = Unsafe.Add<T>(ref searchSpace, length + 3);
-        //        if (!value0.Equals(other5) && !value1.Equals(other5) && !value2.Equals(other5))
-        //        {
-        //            T other6 = Unsafe.Add<T>(ref searchSpace, length + 2);
-        //            if (!value0.Equals(other6) && !value1.Equals(other6) && !value2.Equals(other6))
-        //            {
-        //                T other7 = Unsafe.Add<T>(ref searchSpace, length + 1);
-        //                if (!value0.Equals(other7) && !value1.Equals(other7) && !value2.Equals(other7))
-        //                {
-        //                    T other8 = Unsafe.Add<T>(ref searchSpace, length);
-        //                    if (value0.Equals(other8) || value1.Equals(other8) || value2.Equals(other8))
-        //                        goto label_18;
-        //                }
-        //                else
-        //                    goto label_19;
-        //            }
-        //            else
-        //                goto label_20;
-        //        }
-        //        else
-        //            goto label_21;
-        //    }
-        //    if (length >= 4)
-        //    {
-        //        length -= 4;
-        //        T other1 = Unsafe.Add<T>(ref searchSpace, length + 3);
-        //        if (!value0.Equals(other1) && !value1.Equals(other1) && !value2.Equals(other1))
-        //        {
-        //            T other2 = Unsafe.Add<T>(ref searchSpace, length + 2);
-        //            if (!value0.Equals(other2) && !value1.Equals(other2) && !value2.Equals(other2))
-        //            {
-        //                T other3 = Unsafe.Add<T>(ref searchSpace, length + 1);
-        //                if (!value0.Equals(other3) && !value1.Equals(other3) && !value2.Equals(other3))
-        //                {
-        //                    T other4 = Unsafe.Add<T>(ref searchSpace, length);
-        //                    if (value0.Equals(other4) || value1.Equals(other4) || value2.Equals(other4))
-        //                        goto label_18;
-        //                }
-        //                else
-        //                    goto label_19;
-        //            }
-        //            else
-        //                goto label_20;
-        //        }
-        //        else
-        //            goto label_21;
-        //    }
-        //    while (length > 0)
-        //    {
-        //        --length;
-        //        T other = Unsafe.Add<T>(ref searchSpace, length);
-        //        if (value0.Equals(other) || value1.Equals(other) || value2.Equals(other))
-        //            goto label_18;
-        //    }
-        //    return -1;
-        //label_18:
-        //    return length;
-        //label_19:
-        //    return length + 1;
-        //label_20:
-        //    return length + 2;
-        //label_21:
-        //    return length + 3;
-        //}
-
         public static int LastIndexOfAny<T>(ref T searchSpace, int searchSpaceLength, ref T value, int valueLength) where T : IEquatable<T>
         {
             Debug.Assert(searchSpaceLength >= 0);
@@ -1432,28 +831,6 @@ namespace System
 
             return -1; // not found
         }
-
-
-        //public static int LastIndexOfAny<T>(
-        //  ref T searchSpace,
-        //  int searchSpaceLength,
-        //  ref T value,
-        //  int valueLength)
-        //  where T : IEquatable<T>
-        //{
-        //    if (valueLength == 0)
-        //        return 0;
-        //    int num1 = -1;
-        //    for (int elementOffset = 0; elementOffset < valueLength; ++elementOffset)
-        //    {
-        //        int num2 = SpanHelpers.LastIndexOf<T>(ref searchSpace, Unsafe.Add<T>(ref value, elementOffset), searchSpaceLength);
-        //        if (num2 > num1)
-        //            num1 = num2;
-        //    }
-        //    return num1;
-        //}
-
-
 
         public static bool SequenceEqual<T>(ref T first, ref T second, int length) where T : IEquatable<T>
         {
@@ -1546,45 +923,6 @@ namespace System
             return false;
         }
 
-
-
-        //public static bool SequenceEqual<T>(ref T first, ref T second, int length) where T : IEquatable<T>
-        //{
-        //    if (!Unsafe.AreSame<T>(ref first, ref second))
-        //    {
-        //        IntPtr elementOffset = (IntPtr)0;
-        //        while (length >= 8)
-        //        {
-        //            length -= 8;
-        //            if (Unsafe.Add<T>(ref first, elementOffset).Equals(Unsafe.Add<T>(ref second, elementOffset)) && Unsafe.Add<T>(ref first, elementOffset + 1).Equals(Unsafe.Add<T>(ref second, elementOffset + 1)) && (Unsafe.Add<T>(ref first, elementOffset + 2).Equals(Unsafe.Add<T>(ref second, elementOffset + 2)) && Unsafe.Add<T>(ref first, elementOffset + 3).Equals(Unsafe.Add<T>(ref second, elementOffset + 3))) && (Unsafe.Add<T>(ref first, elementOffset + 4).Equals(Unsafe.Add<T>(ref second, elementOffset + 4)) && Unsafe.Add<T>(ref first, elementOffset + 5).Equals(Unsafe.Add<T>(ref second, elementOffset + 5)) && (Unsafe.Add<T>(ref first, elementOffset + 6).Equals(Unsafe.Add<T>(ref second, elementOffset + 6)) && Unsafe.Add<T>(ref first, elementOffset + 7).Equals(Unsafe.Add<T>(ref second, elementOffset + 7)))))
-        //                elementOffset += 8;
-        //            else
-        //                goto label_12;
-        //        }
-        //        if (length >= 4)
-        //        {
-        //            length -= 4;
-        //            if (Unsafe.Add<T>(ref first, elementOffset).Equals(Unsafe.Add<T>(ref second, elementOffset)) && Unsafe.Add<T>(ref first, elementOffset + 1).Equals(Unsafe.Add<T>(ref second, elementOffset + 1)) && (Unsafe.Add<T>(ref first, elementOffset + 2).Equals(Unsafe.Add<T>(ref second, elementOffset + 2)) && Unsafe.Add<T>(ref first, elementOffset + 3).Equals(Unsafe.Add<T>(ref second, elementOffset + 3))))
-        //                elementOffset += 4;
-        //            else
-        //                goto label_12;
-        //        }
-        //        for (; length > 0; --length)
-        //        {
-        //            if (Unsafe.Add<T>(ref first, elementOffset).Equals(Unsafe.Add<T>(ref second, elementOffset)))
-        //                elementOffset += 1;
-        //            else
-        //                goto label_12;
-        //        }
-        //        goto label_11;
-        //    label_12:
-        //        return false;
-        //    }
-        //label_11:
-        //    return true;
-        //}
-
-
         public static int SequenceCompareTo<T>(ref T first, int firstLength, ref T second, int secondLength)
             where T : IComparable<T>
         {
@@ -1603,27 +941,5 @@ namespace System
             }
             return firstLength.CompareTo(secondLength);
         }
-
-        //public static int SequenceCompareTo<T>(
-        //  ref T first,
-        //  int firstLength,
-        //  ref T second,
-        //  int secondLength)
-        //  where T : IComparable<T>
-        //{
-        //    int num1 = firstLength;
-        //    if (num1 > secondLength)
-        //        num1 = secondLength;
-        //    for (int elementOffset = 0; elementOffset < num1; ++elementOffset)
-        //    {
-        //        int num2 = Unsafe.Add<T>(ref first, elementOffset).CompareTo(Unsafe.Add<T>(ref second, elementOffset));
-        //        if (num2 != 0)
-        //            return num2;
-        //    }
-        //    return firstLength.CompareTo(secondLength);
-        //}
-
-
-
     }
 }

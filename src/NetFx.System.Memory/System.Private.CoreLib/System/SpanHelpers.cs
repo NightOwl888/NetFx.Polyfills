@@ -65,17 +65,6 @@ namespace System
             }
         }
 
-        //[MethodImpl(MethodImplOptions.AggressiveInlining)]
-        //public static unsafe IntPtr Add<T>(this IntPtr start, int index)
-        //{
-        //    if (sizeof(IntPtr) == 4)
-        //    {
-        //        uint num = (uint)(index * Unsafe.SizeOf<T>());
-        //        return (IntPtr)(void*)((IntPtr)(void*)start + (IntPtr)num);
-        //    }
-        //    ulong num1 = (ulong)index * (ulong)Unsafe.SizeOf<T>();
-        //    return (IntPtr)(void*)((IntPtr)(void*)start + (IntPtr)num1);
-        //}
         public unsafe static IntPtr Add<T>(this IntPtr start, int index)
         {
             if (sizeof(IntPtr) == 4)
@@ -90,7 +79,7 @@ namespace System
 
         public static bool IsReferenceOrContainsReferences<T>()
         {
-            return SpanHelpers.PerTypeValues<T>.IsReferenceOrContainsReferences;
+            return PerTypeValues<T>.IsReferenceOrContainsReferences;
         }
 
         private static bool IsReferenceOrContainsReferencesCore(Type type)
@@ -177,60 +166,31 @@ namespace System
         public static unsafe void ClearPointerSizedWithoutReferences(ref byte b, UIntPtr byteLength)
         {
             IntPtr i;
-            for (i = IntPtr.Zero; i.LessThanEqual(byteLength - sizeof(SpanHelpers.Reg64)); i += sizeof(SpanHelpers.Reg64))
+            for (i = IntPtr.Zero; i.LessThanEqual(byteLength - sizeof(Reg64)); i += sizeof(Reg64))
             {
-                Unsafe.As<byte, SpanHelpers.Reg64>(ref Unsafe.Add<byte>(ref b, i)) = new SpanHelpers.Reg64();
+                Unsafe.As<byte, Reg64>(ref Unsafe.Add(ref b, i)) = new Reg64();
             }
-            if (i.LessThanEqual(byteLength - sizeof(SpanHelpers.Reg32)))
+            if (i.LessThanEqual(byteLength - sizeof(Reg32)))
             {
-                Unsafe.As<byte, SpanHelpers.Reg32>(ref Unsafe.Add<byte>(ref b, i)) = new SpanHelpers.Reg32();
-                i += sizeof(SpanHelpers.Reg32);
+                Unsafe.As<byte, Reg32>(ref Unsafe.Add(ref b, i)) = new Reg32();
+                i += sizeof(Reg32);
             }
-            if (i.LessThanEqual(byteLength - sizeof(SpanHelpers.Reg16)))
+            if (i.LessThanEqual(byteLength - sizeof(Reg16)))
             {
-                Unsafe.As<byte, SpanHelpers.Reg16>(ref Unsafe.Add<byte>(ref b, i)) = new SpanHelpers.Reg16();
-                i += sizeof(SpanHelpers.Reg16);
+                Unsafe.As<byte, Reg16>(ref Unsafe.Add(ref b, i)) = new Reg16();
+                i += sizeof(Reg16);
             }
             if (i.LessThanEqual(byteLength - 8))
             {
-                Unsafe.As<byte, long>(ref Unsafe.Add<byte>(ref b, i)) = (long)0;
+                Unsafe.As<byte, long>(ref Unsafe.Add(ref b, i)) = (long)0;
                 i += 8;
             }
             if (sizeof(IntPtr) == 4 && i.LessThanEqual(byteLength - 4))
             {
-                Unsafe.As<byte, int>(ref Unsafe.Add<byte>(ref b, i)) = 0;
+                Unsafe.As<byte, int>(ref Unsafe.Add(ref b, i)) = 0;
                 i += 4;
             }
         }
-
-        //public static unsafe void ClearPointerSizedWithoutReferences(ref byte b, UIntPtr byteLength)
-        //{
-        //    IntPtr zero = IntPtr.Zero;
-        //    while (zero.LessThanEqual(byteLength - sizeof(SpanHelpers.Reg64)))
-        //    {
-        //        *(SpanHelpers.Reg64*)ref Unsafe.As<byte, SpanHelpers.Reg64>(ref Unsafe.Add<byte>(ref b, zero)) = new SpanHelpers.Reg64();
-        //        zero += sizeof(SpanHelpers.Reg64);
-        //    }
-        //    if (zero.LessThanEqual(byteLength - sizeof(SpanHelpers.Reg32)))
-        //    {
-        //        *(SpanHelpers.Reg32*)ref Unsafe.As<byte, SpanHelpers.Reg32>(ref Unsafe.Add<byte>(ref b, zero)) = new SpanHelpers.Reg32();
-        //        zero += sizeof(SpanHelpers.Reg32);
-        //    }
-        //    if (zero.LessThanEqual(byteLength - sizeof(SpanHelpers.Reg16)))
-        //    {
-        //        *(SpanHelpers.Reg16*)ref Unsafe.As<byte, SpanHelpers.Reg16>(ref Unsafe.Add<byte>(ref b, zero)) = new SpanHelpers.Reg16();
-        //        zero += sizeof(SpanHelpers.Reg16);
-        //    }
-        //    if (zero.LessThanEqual(byteLength - 8))
-        //    {
-        //        Unsafe.As<byte, long>(ref Unsafe.Add<byte>(ref b, zero)) = 0L;
-        //        zero += 8;
-        //    }
-        //    if (sizeof(IntPtr) != 4 || !zero.LessThanEqual(byteLength - 4))
-        //        return;
-        //    Unsafe.As<byte, int>(ref Unsafe.Add<byte>(ref b, zero)) = 0;
-        //    IntPtr num = zero + 4;
-        //}
 
         public static void ClearPointerSizedWithReferences(ref IntPtr ip, UIntPtr pointerSizeLength)
         {
@@ -278,45 +238,6 @@ namespace System
             }
         }
 
-        //public static unsafe void ClearPointerSizedWithReferences(
-        //  ref IntPtr ip,
-        //  UIntPtr pointerSizeLength)
-        //{
-        //    IntPtr elementOffset = IntPtr.Zero;
-        //    IntPtr zero = IntPtr.Zero;
-        //    IntPtr num1;
-        //    for (; (num1 = elementOffset + 8).LessThanEqual(pointerSizeLength); elementOffset = num1)
-        //    {
-        //        *(IntPtr*)ref Unsafe.Add<IntPtr>(ref ip, elementOffset + 0) = new IntPtr();
-        //        *(IntPtr*)ref Unsafe.Add<IntPtr>(ref ip, elementOffset + 1) = new IntPtr();
-        //        *(IntPtr*)ref Unsafe.Add<IntPtr>(ref ip, elementOffset + 2) = new IntPtr();
-        //        *(IntPtr*)ref Unsafe.Add<IntPtr>(ref ip, elementOffset + 3) = new IntPtr();
-        //        *(IntPtr*)ref Unsafe.Add<IntPtr>(ref ip, elementOffset + 4) = new IntPtr();
-        //        *(IntPtr*)ref Unsafe.Add<IntPtr>(ref ip, elementOffset + 5) = new IntPtr();
-        //        *(IntPtr*)ref Unsafe.Add<IntPtr>(ref ip, elementOffset + 6) = new IntPtr();
-        //        *(IntPtr*)ref Unsafe.Add<IntPtr>(ref ip, elementOffset + 7) = new IntPtr();
-        //    }
-        //    IntPtr num2;
-        //    if ((num2 = elementOffset + 4).LessThanEqual(pointerSizeLength))
-        //    {
-        //        *(IntPtr*)ref Unsafe.Add<IntPtr>(ref ip, elementOffset + 0) = new IntPtr();
-        //        *(IntPtr*)ref Unsafe.Add<IntPtr>(ref ip, elementOffset + 1) = new IntPtr();
-        //        *(IntPtr*)ref Unsafe.Add<IntPtr>(ref ip, elementOffset + 2) = new IntPtr();
-        //        *(IntPtr*)ref Unsafe.Add<IntPtr>(ref ip, elementOffset + 3) = new IntPtr();
-        //        elementOffset = num2;
-        //    }
-        //    IntPtr num3;
-        //    if ((num3 = elementOffset + 2).LessThanEqual(pointerSizeLength))
-        //    {
-        //        *(IntPtr*)ref Unsafe.Add<IntPtr>(ref ip, elementOffset + 0) = new IntPtr();
-        //        *(IntPtr*)ref Unsafe.Add<IntPtr>(ref ip, elementOffset + 1) = new IntPtr();
-        //        elementOffset = num3;
-        //    }
-        //    if (!(elementOffset + 1).LessThanEqual(pointerSizeLength))
-        //        return;
-        //    *(IntPtr*)ref Unsafe.Add<IntPtr>(ref ip, elementOffset) = new IntPtr();
-        //}
-
         //[MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static unsafe bool LessThanEqual(this IntPtr index, UIntPtr length)
         {
@@ -330,14 +251,14 @@ namespace System
 
             public ComparerComparable(T value, TComparer comparer)
             {
-                this._value = value;
-                this._comparer = comparer;
+                _value = value;
+                _comparer = comparer;
             }
 
             //[MethodImpl(MethodImplOptions.AggressiveInlining)]
             public int CompareTo(T other)
             {
-                return this._comparer.Compare(this._value, other);
+                return _comparer.Compare(_value, other);
             }
         }
 

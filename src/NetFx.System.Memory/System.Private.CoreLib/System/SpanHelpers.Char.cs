@@ -100,35 +100,6 @@ namespace System
             return lengthDelta;
         }
 
-        //public static unsafe int SequenceCompareTo(
-        //  ref char first,
-        //  int firstLength,
-        //  ref char second,
-        //  int secondLength)
-        //{
-        //    int num1 = firstLength - secondLength;
-        //    if (!Unsafe.AreSame<char>(ref first, ref second))
-        //    {
-        //        IntPtr num2 = (IntPtr)(firstLength < secondLength ? firstLength : secondLength);
-        //        IntPtr elementOffset = (IntPtr)0;
-        //        if ((UIntPtr)(void*)num2 >= (UIntPtr)(sizeof(UIntPtr) / 2))
-        //        {
-        //            while ((void*)num2 >= (void*)(elementOffset + sizeof(UIntPtr) / 2) && !(Unsafe.ReadUnaligned<UIntPtr>(ref Unsafe.As<char, byte>(ref Unsafe.Add<char>(ref first, elementOffset))) != Unsafe.ReadUnaligned<UIntPtr>(ref Unsafe.As<char, byte>(ref Unsafe.Add<char>(ref second, elementOffset)))))
-        //                elementOffset += sizeof(UIntPtr) / 2;
-        //        }
-        //        if (sizeof(UIntPtr) > 4 && (void*)num2 >= (void*)(elementOffset + 2) && Unsafe.ReadUnaligned<int>(ref Unsafe.As<char, byte>(ref Unsafe.Add<char>(ref first, elementOffset))) == Unsafe.ReadUnaligned<int>(ref Unsafe.As<char, byte>(ref Unsafe.Add<char>(ref second, elementOffset))))
-        //            elementOffset += 2;
-        //        while ((void*)elementOffset < (void*)num2)
-        //        {
-        //            int num3 = Unsafe.Add<char>(ref first, elementOffset).CompareTo(Unsafe.Add<char>(ref second, elementOffset));
-        //            if (num3 != 0)
-        //                return num3;
-        //            elementOffset += 1;
-        //        }
-        //    }
-        //    return num1;
-        //}
-
         public static unsafe int IndexOf(ref char searchSpace, char value, int length)
         {
             Debug.Assert(length >= 0);
@@ -177,51 +148,6 @@ namespace System
         Found:
             return (int)(offset);
         }
-
-        //public static unsafe int IndexOf(ref char searchSpace, char value, int length)
-        //{
-        //    fixed (char* chPtr1 = &searchSpace)
-        //    {
-        //        char* chPtr2 = chPtr1;
-        //        char* chPtr3 = chPtr2 + length;
-        //        while (length >= 4)
-        //        {
-        //            length -= 4;
-        //            if ((int)*chPtr2 != (int)value)
-        //            {
-        //                if ((int)chPtr2[1] != (int)value)
-        //                {
-        //                    if ((int)chPtr2[2] != (int)value)
-        //                    {
-        //                        if ((int)chPtr2[3] != (int)value)
-        //                        {
-        //                            chPtr2 += 4;
-        //                            continue;
-        //                        }
-        //                        ++chPtr2;
-        //                    }
-        //                    ++chPtr2;
-        //                }
-        //                ++chPtr2;
-        //                goto label_14;
-        //            }
-        //            else
-        //                goto label_14;
-        //        }
-        //        while (length > 0)
-        //        {
-        //            --length;
-        //            if ((int)*chPtr2 != (int)value)
-        //                ++chPtr2;
-        //            else
-        //                goto label_14;
-        //        }
-        //        return -1;
-        //    label_14:
-        //        return (int)(chPtr2 - chPtr1);
-        //    }
-        //}
-
 
         public static unsafe int IndexOfAny(ref char searchStart, char value0, char value1, int length)
         {
@@ -427,7 +353,6 @@ namespace System
             return (int)offset;
         }
 
-
         public static unsafe int LastIndexOf(ref char searchSpace, char value, int length)
         {
             Debug.Assert(length >= 0);
@@ -473,38 +398,6 @@ namespace System
                 return (int)(pCh - pEndCh) + 3;
             }
         }
-
-        //public static unsafe int LastIndexOf(ref char searchSpace, char value, int length)
-        //{
-        //    fixed (char* chPtr1 = &searchSpace)
-        //    {
-        //        char* chPtr2 = chPtr1 + length;
-        //        char* chPtr3 = chPtr1;
-        //        while (length >= 4)
-        //        {
-        //            length -= 4;
-        //            chPtr2 -= 4;
-        //            if ((int)chPtr2[3] == (int)value)
-        //                return (int)(chPtr2 - chPtr3) + 3;
-        //            if ((int)chPtr2[2] == (int)value)
-        //                return (int)(chPtr2 - chPtr3) + 2;
-        //            if ((int)chPtr2[1] == (int)value)
-        //                return (int)(chPtr2 - chPtr3) + 1;
-        //            if ((int)*chPtr2 == (int)value)
-        //                goto label_9;
-        //        }
-        //        while (length > 0)
-        //        {
-        //            --length;
-        //            --chPtr2;
-        //            if ((int)*chPtr2 == (int)value)
-        //                goto label_9;
-        //        }
-        //        return -1;
-        //    label_9:
-        //        return (int)(chPtr2 - chPtr3);
-        //    }
-        //}
 
         //[MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static ref char Add(ref char start, nuint offset) => ref Unsafe.Add(ref start, (nint)offset);

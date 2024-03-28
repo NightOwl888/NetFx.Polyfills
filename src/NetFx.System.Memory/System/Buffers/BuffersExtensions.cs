@@ -14,23 +14,6 @@ namespace System.Buffers
         /// Returns position of first occurrence of item in the <see cref="ReadOnlySequence{T}"/>
         /// </summary>
         //[MethodImpl(MethodImplOptions.AggressiveInlining)]
-        //public static SequencePosition? PositionOf<T>(in this ReadOnlySequence<T> source, T value) where T : IEquatable<T>?
-        //{
-        //    if (source.IsSingleSegment)
-        //    {
-        //        int index = source.First.Span.IndexOf(value);
-        //        if (index != -1)
-        //        {
-        //            return source.Seek(index);
-        //        }
-
-        //        return null;
-        //    }
-        //    else
-        //    {
-        //        return PositionOfMultiSegment(source, value);
-        //    }
-        //}
         public static SequencePosition? PositionOf<T>(this in ReadOnlySequence<T> source, T value) where T : IEquatable<T>
         {
             if (source.IsSingleSegment)
