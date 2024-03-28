@@ -1,5 +1,5 @@
-﻿//// Licensed to the .NET Foundation under one or more agreements.
-//// The .NET Foundation licenses this file to you under the MIT license.
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
 
 //using System.Collections.Generic;
 //using System.Diagnostics.Tracing;
@@ -10,6 +10,7 @@
 ////using Microsoft.DotNet.RemoteExecutor;
 //using Xunit;
 
+//// NetFx: We don't have the remote invoker set up
 //namespace System.Buffers.ArrayPool.Tests
 //{
 //    public class CollectionTests : ArrayPoolTest

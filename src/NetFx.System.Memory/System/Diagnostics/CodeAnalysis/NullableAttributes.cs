@@ -1,4 +1,7 @@
-﻿#pragma warning disable IDE0079 // Remove unnecessary suppression
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+
+#pragma warning disable IDE0079 // Remove unnecessary suppression
 #pragma warning disable MA0048 // File name must match type name
 #pragma warning restore IDE0079 // Remove unnecessary suppression
 #define INTERNAL_NULLABLE_ATTRIBUTES
