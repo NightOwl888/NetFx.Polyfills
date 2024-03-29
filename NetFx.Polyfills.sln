@@ -13,6 +13,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{977BB9EC-4969-43F8-A737-1E4B8BD2559C}"
 	ProjectSection(SolutionItems) = preProject
 		.build\dependencies.props = .build\dependencies.props
+		.build\nuget.props = .build\nuget.props
 		.build\key.snk = .build\key.snk
 		.build\NetFx.System.Runtime.CompilerServices.Unsafe.Ref.targets = .build\NetFx.System.Runtime.CompilerServices.Unsafe.Ref.targets
 		.build\TestReferences.Common.targets = .build\TestReferences.Common.targets
