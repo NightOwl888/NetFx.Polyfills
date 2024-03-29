@@ -10,7 +10,6 @@
   <PropertyGroup>
     <TargetFrameworks>net40</TargetFrameworks>
     
-    <IsPackable>true</IsPackable>
     <PackageDescription>
       Provides the System.Runtime.CompilerServices.Unsafe class, which provides generic, low-level functionality for manipulating pointers.
 
