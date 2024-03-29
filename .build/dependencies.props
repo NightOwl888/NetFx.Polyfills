@@ -4,6 +4,7 @@
     <!-- NOTE: The Microsoft.NET.Sdk.IL version must match the SDK configured in global.json -->
     <MicrosoftNETSdkILPackageReferenceVersion>8.0.0</MicrosoftNETSdkILPackageReferenceVersion>
     <MicrosoftNETTestSdkPackageReferenceVersion>16.1.1</MicrosoftNETTestSdkPackageReferenceVersion>
+    <NerdBankGitVersioningPackageReferenceVersion>[3.5.73-alpha]</NerdBankGitVersioningPackageReferenceVersion>
     <SystemBuffersPackageReferenceVersion>4.5.1</SystemBuffersPackageReferenceVersion>
     <SystemMemoryPackageReferenceVersion>4.5.5</SystemMemoryPackageReferenceVersion>
     <SystemNumericsVectorsPackageReferenceVersion>4.5.0</SystemNumericsVectorsPackageReferenceVersion>
