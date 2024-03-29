@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Numerics.Vectors" Version="4.5.0" />
+    <PackageReference Include="System.Numerics.Vectors" Version="$(SystemNumericsVectorsPackageReferenceVersion)" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TestMicrosoftAssemblies)'!='true'">
@@ -19,9 +19,9 @@
   <Import Project="$(RepositoryRoot)/.build/NetFx.System.Runtime.CompilerServices.Unsafe.Ref.targets" Condition="'$(TestMicrosoftAssemblies)'!='true'" />
   
   <ItemGroup Condition="'$(TestMicrosoftAssemblies)'=='true'">
-    <PackageReference Include="System.Buffers" Version="4.5.1" />
-    <PackageReference Include="System.Memory" Version="4.5.5" />
-    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="4.5.3" />
+    <PackageReference Include="System.Buffers" Version="$(SystemBuffersPackageReferenceVersion)" />
+    <PackageReference Include="System.Memory" Version="$(SystemMemoryPackageReferenceVersion)" />
+    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="$(SystemRuntimeCompilerServicesUnsafePackageReferenceVersion)" />
   </ItemGroup>
   
   <ItemGroup>
