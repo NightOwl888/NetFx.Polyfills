@@ -24,14 +24,6 @@
     01 00 15 2e 4e 45 54 46 72 61 6d 65 77 6f 72 6b
     41 73 73 65 6d 62 6c 79 00 00 00
   ) // ".NETFrameworkAssembly", ""
-  .custom instance void [CORE_ASSEMBLY]System.Reflection.AssemblyMetadataAttribute::.ctor(string, string) = (
-    01 00 0b 53 65 72 76 69 63 65 61 62 6c 65 04 54
-    72 75 65 00 00
-  ) // "Serviceable", "True"
-  .custom instance void [CORE_ASSEMBLY]System.Reflection.AssemblyMetadataAttribute::.ctor(string, string) = (
-    01 00 0b 49 73 54 72 69 6d 6d 61 62 6c 65 04 54
-    72 75 65 00 00
-  ) // "IsTrimmable", "True"
   .custom instance void [CORE_ASSEMBLY]System.Reflection.AssemblyCopyrightAttribute::.ctor(string) = ( 01 00 21 43 6F 70 79 72 69 67 68 74 20 C2 A9 20   // ..!Copyright .. 
                                                                                                   32 30 32 34 20 4E 65 74 46 78 2E 50 6F 6C 79 66   // 2024 NetFx.Polyf
                                                                                                   69 6C 6C 73 00 00 )                               // ills..
