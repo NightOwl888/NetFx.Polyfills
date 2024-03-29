@@ -5,6 +5,10 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <Description>System.Buffers polyfill for .NET Framework</Description>
+  </PropertyGroup>
+
   <ItemGroup>
     <Compile Update="Resources\SR.Designer.cs">
       <DesignTime>True</DesignTime>
