@@ -6,7 +6,7 @@ properties {
     [string]$toolsDirectory        = "$baseDirectory/.tools"
     [string]$nugetPackageDirectory = "$artifactsDirectory/NuGetPackages"
     [string]$testResultsDirectory  = "$artifactsDirectory/TestResults"
-    [string]$solutionFile          = "$baseDirectory/J2N.sln"
+    [string]$solutionFile          = "$baseDirectory/NetFx.Polyfills.sln"
     [string]$versionScriptFile     = "$baseDirectory/.build/version.ps1"
     [string]$testResultsFileName   = "TestResults.trx"
 
