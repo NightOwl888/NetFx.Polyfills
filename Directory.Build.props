@@ -5,6 +5,7 @@
     <LangVersion>11.0</LangVersion>
     <GitHubOrganization>NightOwl888</GitHubOrganization>
     <GitHubProject>NetFx.Polyfills</GitHubProject>
+    <Product>$(GitHubProject)</Product>
   </PropertyGroup>
 
   <PropertyGroup Label="Assembly Signing">
