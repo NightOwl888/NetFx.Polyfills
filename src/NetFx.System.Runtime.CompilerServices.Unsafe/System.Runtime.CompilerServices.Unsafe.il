@@ -14,9 +14,10 @@
 
   .custom instance void [CORE_ASSEMBLY]System.Reflection.AssemblyFileVersionAttribute::.ctor(string) = FILE_VERSION
   .custom instance void [CORE_ASSEMBLY]System.Reflection.AssemblyInformationalVersionAttribute::.ctor(string) = INFORMATIONAL_VERSION
-  .custom instance void [CORE_ASSEMBLY]System.Reflection.AssemblyTitleAttribute::.ctor(string) = ( 01 00 26 53 79 73 74 65 6D 2E 52 75 6E 74 69 6D   // ..&System.Runtim
-                                                                                              65 2E 43 6F 6D 70 69 6C 65 72 53 65 72 76 69 63   // e.CompilerServic
-                                                                                              65 73 2E 55 6E 73 61 66 65 00 00 )                // es.Unsafe..
+  .custom instance void [CORE_ASSEMBLY]System.Reflection.AssemblyTitleAttribute::.ctor(string) = ( 01 00 2C 4E 65 74 46 78 2E 53 79 73 74 65 6D 2E   // ..,NetFx.System.
+                                                                                              52 75 6E 74 69 6D 65 2E 43 6F 6D 70 69 6C 65 72   // Runtime.Compiler
+                                                                                              53 65 72 76 69 63 65 73 2E 55 6E 73 61 66 65 00   // Services.Unsafe.
+                                                                                              00 ) 
   .custom instance void [CORE_ASSEMBLY]System.Reflection.AssemblyDescriptionAttribute::.ctor(string) = ( 01 00 42 53 79 73 74 65 6D 2E 52 75 6E 74 69 6D   // ..BSystem.Runtim
                                                                                                     65 2E 43 6F 6D 70 69 6C 65 72 53 65 72 76 69 63   // e.CompilerServic
                                                                                                     65 73 2E 55 6E 73 61 66 65 20 70 6F 6C 79 66 69   // es.Unsafe polyfi
