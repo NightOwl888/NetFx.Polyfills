@@ -5,7 +5,7 @@ using System.Resources;
 using System.Runtime.CompilerServices;
 
 //[assembly: AssemblyCompany("Microsoft Corporation")]
-[assembly: AssemblyCopyright("© Microsoft Corporation. All rights reserved.")]
+//[assembly: AssemblyCopyright("© Microsoft Corporation. All rights reserved.")]
 [assembly: AssemblyDefaultAlias("System.Memory")]
 [assembly: AssemblyDescription("System.Memory")]
 //[assembly: AssemblyFileVersion("4.6.31308.01")]
