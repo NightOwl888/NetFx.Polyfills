@@ -5,5 +5,7 @@
   <PropertyGroup Label="Assembly Documentation">
     <DocumentationFile Condition="'$(DocumentationFile)'==''">bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
   </PropertyGroup>
+
+  <Import Project="$(RepositoryRoot).build/nuget.props" />
   
 </Project>
