@@ -29,8 +29,8 @@
   .custom instance void [CORE_ASSEMBLY]System.Reflection.AssemblyCopyrightAttribute::.ctor(string) = ( 01 00 21 43 6F 70 79 72 69 67 68 74 20 C2 A9 20   // ..!Copyright .. 
                                                                                                   32 30 32 34 20 4E 65 74 46 78 2E 50 6F 6C 79 66   // 2024 NetFx.Polyf
                                                                                                   69 6C 6C 73 00 00 )                               // ills..
-  .custom instance void [CORE_ASSEMBLY]System.Reflection.AssemblyCompanyAttribute::.ctor(string) = ( 01 00 15 4D 69 63 72 6F 73 6F 66 74 20 43 6F 72   // ...Microsoft Cor
-                                                                                      70 6F 72 61 74 69 6F 6E 00 00 )                   // poration..
+  .custom instance void [CORE_ASSEMBLY]System.Reflection.AssemblyCompanyAttribute::.ctor(string) = ( 01 00 0F 4E 65 74 46 78 2E 50 6F 6C 79 66 69 6C   // ...NetFx.Polyfil
+                                                                                                6C 73 00 00 )                                     // ls..
   .custom instance void [CORE_ASSEMBLY]System.Reflection.AssemblyProductAttribute::.ctor(string) = ( 01 00 1A 4D 69 63 72 6F 73 6F 66 74 C2 AE 20 2E   // ...Microsoft.. .
                                                                                       4E 45 54 20 46 72 61 6D 65 77 6F 72 6B 00 00 )    // NET Framework..
   .custom instance void [CORE_ASSEMBLY]System.CLSCompliantAttribute::.ctor(bool) = (
