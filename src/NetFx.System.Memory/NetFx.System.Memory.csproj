@@ -8,6 +8,10 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <Description>System.Memory polyfill for .NET Framework</Description>
+  </PropertyGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\NetFx.System.Buffers\NetFx.System.Buffers.csproj" />
   </ItemGroup>
