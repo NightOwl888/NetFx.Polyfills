@@ -9,12 +9,13 @@
   
   <PropertyGroup>
     <TargetFrameworks>net40</TargetFrameworks>
-    
-    <PackageDescription>
-      Provides the System.Runtime.CompilerServices.Unsafe class, which provides generic, low-level functionality for manipulating pointers.
+  </PropertyGroup>
 
-      Commonly Used Types:
-      System.Runtime.CompilerServices.Unsafe
+  <PropertyGroup Label="NuGet Package Properties">
+    <PackageDescription>Provides the System.Runtime.CompilerServices.Unsafe class, which provides generic, low-level functionality for manipulating pointers.
+
+Commonly Used Types:
+System.Runtime.CompilerServices.Unsafe
     </PackageDescription>
   </PropertyGroup>
   

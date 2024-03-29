@@ -9,6 +9,14 @@
     <Description>System.Buffers polyfill for .NET Framework</Description>
   </PropertyGroup>
 
+  <PropertyGroup Label="NuGet Package Properties">
+    <PackageDescription>Provides resource pooling of any type for performance-critical applications that allocate and deallocate objects frequently.
+
+Commonly Used Types:
+System.Buffers.ArrayPool&lt;T&gt;
+    </PackageDescription>
+  </PropertyGroup>
+
   <ItemGroup>
     <Compile Update="Resources\SR.Designer.cs">
       <DesignTime>True</DesignTime>
