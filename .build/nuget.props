@@ -12,6 +12,6 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include="README.md" Pack="true" PackagePath="$(PackageReadmeFile)"/>
-    <None Include="$(RepositoryRoot)branding\$(PackageIcon)" Pack="true" PackagePath="$(PackageIcon)"/>
+    <None Include="$(RepositoryRoot)branding\$(PackageIcon)" Pack="true" PackagePath="$(PackageIcon)" Visible="false"/>
   </ItemGroup>
 </Project>
