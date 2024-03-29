@@ -32,10 +32,9 @@
     01 00 0b 49 73 54 72 69 6d 6d 61 62 6c 65 04 54
     72 75 65 00 00
   ) // "IsTrimmable", "True"
-  .custom instance void [CORE_ASSEMBLY]System.Reflection.AssemblyCopyrightAttribute::.ctor(string) = ( 01 00 2F C2 A9 20 4D 69 63 72 6F 73 6F 66 74 20   // ../.. Microsoft
-                                                                                        43 6F 72 70 6F 72 61 74 69 6F 6E 2E 20 20 41 6C   // Corporation.  Al
-                                                                                        6C 20 72 69 67 68 74 73 20 72 65 73 65 72 76 65   // l rights reserve
-                                                                                        64 2E 00 00 )                                     // d...
+  .custom instance void [CORE_ASSEMBLY]System.Reflection.AssemblyCopyrightAttribute::.ctor(string) = ( 01 00 21 43 6F 70 79 72 69 67 68 74 20 C2 A9 20   // ..!Copyright .. 
+                                                                                                  32 30 32 34 20 4E 65 74 46 78 2E 50 6F 6C 79 66   // 2024 NetFx.Polyf
+                                                                                                  69 6C 6C 73 00 00 )                               // ills..
   .custom instance void [CORE_ASSEMBLY]System.Reflection.AssemblyCompanyAttribute::.ctor(string) = ( 01 00 15 4D 69 63 72 6F 73 6F 66 74 20 43 6F 72   // ...Microsoft Cor
                                                                                       70 6F 72 61 74 69 6F 6E 00 00 )                   // poration..
   .custom instance void [CORE_ASSEMBLY]System.Reflection.AssemblyProductAttribute::.ctor(string) = ( 01 00 1A 4D 69 63 72 6F 73 6F 66 74 C2 AE 20 2E   // ...Microsoft.. .
