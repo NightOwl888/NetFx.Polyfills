@@ -20,7 +20,7 @@ properties {
     [string]$minimumSdkVersion     = "8.0.100"
 
     #test parameters
-    [string]$testPlatforms         = "x64"
+    [string]$testPlatforms         = "x64;x86"
 }
 
 $backedUpFiles = New-Object System.Collections.ArrayList
