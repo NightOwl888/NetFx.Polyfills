@@ -9,6 +9,7 @@
     <SystemMemoryPackageReferenceVersion>4.5.5</SystemMemoryPackageReferenceVersion>
     <SystemNumericsVectorsPackageReferenceVersion>4.5.0</SystemNumericsVectorsPackageReferenceVersion>
     <SystemRuntimeCompilerServicesUnsafePackageReferenceVersion>4.5.3</SystemRuntimeCompilerServicesUnsafePackageReferenceVersion>
+    <SystemValueTuplePackageReferenceVersion>4.5.0</SystemValueTuplePackageReferenceVersion>
     <XunitPackageReferenceVersion>2.4.1</XunitPackageReferenceVersion>
     <XunitRunnerVisualStudioPackageReferenceVersion>$(XunitPackageReferenceVersion)</XunitRunnerVisualStudioPackageReferenceVersion>
   </PropertyGroup>

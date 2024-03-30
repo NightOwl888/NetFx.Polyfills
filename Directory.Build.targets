@@ -2,6 +2,13 @@
 
   <Import Project="$(MSBuildThisFileDirectory)/.build/dependencies.props" Condition="Exists('$(MSBuildThisFileDirectory)/.build/dependencies.props')" />
 
+
+  <!-- Features in .NET Framework 4.7+ only -->
+  <PropertyGroup Condition="$(TargetFramework.StartsWith('net47')) Or $(TargetFramework.StartsWith('net48'))">
+    <DefineConstants>$(DefineConstants);FEATURE_RUNTIMEINFORMATION</DefineConstants>
+  </PropertyGroup>
+
+
   <PropertyGroup Label="Versioning">
     <GenerateAssemblyVersionInfo>false</GenerateAssemblyVersionInfo>
   </PropertyGroup>

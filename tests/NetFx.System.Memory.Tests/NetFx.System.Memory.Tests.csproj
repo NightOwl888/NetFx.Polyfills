@@ -27,4 +27,13 @@
     <Compile Include="..\..\src\NetFx.System.Memory\System.Private.CoreLib\System\MutableDecimal.cs" Link="MutableDecimal.cs" />
   </ItemGroup>
 
+  <ItemGroup Condition="'$(TargetFramework)'=='net462'">
+    <PackageReference Include="System.ValueTuple" Version="$(SystemValueTuplePackageReferenceVersion)"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\Common\RuntimeInformation.cs" Link="RuntimeInformation.cs" />
+    <Compile Include="..\Common\AssertExtensions.cs" Link="AssertExtensions.cs" />
+  </ItemGroup>
+
 </Project>
