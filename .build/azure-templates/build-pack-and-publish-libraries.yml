@@ -92,6 +92,6 @@ steps:
     foreach ($framework in $testTargetFrameworks) {
         $outputPath = "$outputRoot/$framework"
         Write-Host "Publishing '$framework' to '$outputPath'..."
-        dotnet publish --output "$outputPath" --framework "$framework" --configuration "$configuration" --no-build --no-restore --verbosity normal /p:TestAllTargetFrameworks=true
+        dotnet publish --framework "$framework" --configuration "$configuration" --no-build --no-restore --verbosity normal /p:"PublishDir=$outputPath" /p:TestAllTargetFrameworks=true
     }
   displayName: 'dotnet publish ${{ parameters.testTargetFrameworks }}'
