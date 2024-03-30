@@ -5,6 +5,7 @@ VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{25739248-87D7-40B0-B267-E2445C92C143}"
 	ProjectSection(SolutionItems) = preProject
+		azure-pipelines.yml = azure-pipelines.yml
 		.build\dependencies.props = .build\dependencies.props
 		.build\key.snk = .build\key.snk
 		.build\NetFx.System.Runtime.CompilerServices.Unsafe.Ref.targets = .build\NetFx.System.Runtime.CompilerServices.Unsafe.Ref.targets
