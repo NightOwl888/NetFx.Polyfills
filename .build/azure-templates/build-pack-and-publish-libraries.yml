@@ -95,3 +95,11 @@ steps:
         dotnet publish --framework "$framework" --configuration "$configuration" --no-build --no-restore --verbosity normal /p:"PublishDir=$outputPath" /p:TestAllTargetFrameworks=true
     }
   displayName: 'dotnet publish ${{ parameters.testTargetFrameworks }}'
+
+- task: PublishPipelineArtifact@1
+  displayName: 'Publish Artifact: ${{ parameters.binaryArtifactName }}'
+  inputs:
+    targetPath: '$(Build.ArtifactStagingDirectory)/${{ parameters.binaryArtifactName }}'
+    artifact: '${{ parameters.binaryArtifactName }}'
+    publishLocation: 'pipeline'
+  condition: succeededOrFailed()
