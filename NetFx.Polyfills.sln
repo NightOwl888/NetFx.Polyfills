@@ -75,6 +75,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetFx.System.Memory.Tests",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetFx.System.Runtime.CompilerServices.Unsafe.Tests", "tests\NetFx.System.Runtime.CompilerServices.Unsafe.Tests\NetFx.System.Runtime.CompilerServices.Unsafe.Tests.csproj", "{0DA965E9-7E46-4CE6-A371-20E66CB6A4DF}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{2485F9C9-E96E-474B-8A3D-63DA3F3F6B2F}"
+	ProjectSection(SolutionItems) = preProject
+		docs\building-and-testing.md = docs\building-and-testing.md
+		docs\make-release.md = docs\make-release.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
