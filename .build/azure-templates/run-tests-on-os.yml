@@ -83,12 +83,9 @@ steps:
             if (!(Test-Path "$testResultDirectory")) {
                 New-Item "$testResultDirectory" -ItemType Directory -Force
             }
-    
+
             Write-Host "Testing '$testBinary' on framework '$framework' and outputting test results to '$testResultDirectory/${{ parameters.testResultsFileName }}'..."
             dotnet test "$testBinary" --framework "$framework" --blame --no-build --no-restore --logger:"console;verbosity=normal" --logger:"trx;LogFileName=${{ parameters.testResultsFileName }}" --results-directory:"$testResultDirectory" --blame-hang-timeout 10minutes --blame-hang-dump-type mini -- RunConfiguration.TargetPlatform=$testPlatform
-    
-
-            $testExpression = "$testExpression -- RunConfiguration.TargetPlatform=$testPlatform"
 
             #$scriptBlock = {
             #    param([string]$testBinary, [string]$fwork, [string]$testPlatform, [string]$testResultDirectory)
