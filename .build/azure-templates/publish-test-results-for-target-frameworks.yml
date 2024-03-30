@@ -26,26 +26,6 @@ steps:
 
 - template: publish-test-results.yml
   parameters:
-    framework: 'net6.0'
-    testProjectName: '${{ parameters.testProjectName }}'
-    osName: '${{ parameters.osName }}'
-    testPlatform: '${{ parameters.testPlatform }}'
-    testResultsFormat: '${{ parameters.testResultsFormat }}'
-    testResultsArtifactName: '${{ parameters.testResultsArtifactName }}'
-    testResultsFileName: '${{ parameters.testResultsFileName }}'
-
-- template: publish-test-results.yml
-  parameters:
-    framework: 'net5.0'
-    testProjectName: '${{ parameters.testProjectName }}'
-    osName: '${{ parameters.osName }}'
-    testPlatform: '${{ parameters.testPlatform }}'
-    testResultsFormat: '${{ parameters.testResultsFormat }}'
-    testResultsArtifactName: '${{ parameters.testResultsArtifactName }}'
-    testResultsFileName: '${{ parameters.testResultsFileName }}'
-
-- template: publish-test-results.yml
-  parameters:
     framework: 'net48'
     testProjectName: '${{ parameters.testProjectName }}'
     osName: '${{ parameters.osName }}'
@@ -66,39 +46,7 @@ steps:
 
 - template: publish-test-results.yml
   parameters:
-    framework: 'net461'
-    testProjectName: '${{ parameters.testProjectName }}'
-    osName: '${{ parameters.osName }}'
-    testPlatform: '${{ parameters.testPlatform }}'
-    testResultsFormat: '${{ parameters.testResultsFormat }}'
-    testResultsArtifactName: '${{ parameters.testResultsArtifactName }}'
-    testResultsFileName: '${{ parameters.testResultsFileName }}'
-
-# Special Case: Using lowest supported version of .NET Framework (4.5.2) in xUnit to test .NET Framework 4.0.
-# This only works because we are using the AdditionalProperties attribute to set the target framework of the project reference.
-- template: publish-test-results.yml
-  parameters:
-    framework: 'net452'
-    testProjectName: '${{ parameters.testProjectName }}'
-    osName: '${{ parameters.osName }}'
-    testPlatform: '${{ parameters.testPlatform }}'
-    testResultsFormat: '${{ parameters.testResultsFormat }}'
-    testResultsArtifactName: '${{ parameters.testResultsArtifactName }}'
-    testResultsFileName: '${{ parameters.testResultsFileName }}'
-
-- template: publish-test-results.yml
-  parameters:
-    framework: 'MonoAndroid90'
-    testProjectName: '${{ parameters.testProjectName }}'
-    osName: '${{ parameters.osName }}'
-    testPlatform: '${{ parameters.testPlatform }}'
-    testResultsFormat: '${{ parameters.testResultsFormat }}'
-    testResultsArtifactName: '${{ parameters.testResultsArtifactName }}'
-    testResultsFileName: '${{ parameters.testResultsFileName }}'
-
-- template: publish-test-results.yml
-  parameters:
-    framework: 'MonoAndroid100'
+    framework: 'net462'
     testProjectName: '${{ parameters.testProjectName }}'
     osName: '${{ parameters.osName }}'
     testPlatform: '${{ parameters.testPlatform }}'
