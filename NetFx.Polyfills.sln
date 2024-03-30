@@ -3,16 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A6DF412F-8147-4D1F-B388-0B0284A55772}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{25739248-87D7-40B0-B267-E2445C92C143}"
 	ProjectSection(SolutionItems) = preProject
-		src\Directory.Build.targets = src\Directory.Build.targets
-	EndProjectSection
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetFx.System.Runtime.CompilerServices.Unsafe", "src\NetFx.System.Runtime.CompilerServices.Unsafe\NetFx.System.Runtime.CompilerServices.Unsafe.ilproj", "{F79D5B6E-CE71-4ABE-ACB8-6385E8C91C63}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{977BB9EC-4969-43F8-A737-1E4B8BD2559C}"
-	ProjectSection(SolutionItems) = preProject
-		azure-pipelines.yml = azure-pipelines.yml
 		.build\dependencies.props = .build\dependencies.props
 		.build\key.snk = .build\key.snk
 		.build\NetFx.System.Runtime.CompilerServices.Unsafe.Ref.targets = .build\NetFx.System.Runtime.CompilerServices.Unsafe.Ref.targets
@@ -20,10 +12,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{977BB9
 		.build\runbuild.ps1 = .build\runbuild.ps1
 		.build\TestReferences.Common.targets = .build\TestReferences.Common.targets
 		.build\TestTargetFramework.props = .build\TestTargetFramework.props
-		version.json = version.json
+		.build\version.ps1 = .build\version.ps1
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{078A8D3C-FA65-4F14-9C21-2132321EBEFA}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{565E0A3F-633B-4FF1-9244-67E59D16B73A}"
+	ProjectSection(SolutionItems) = preProject
+		src\Directory.Build.targets = src\Directory.Build.targets
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{27FEC39B-F7C9-4110-9F98-BDD75ECF1D1A}"
+	ProjectSection(SolutionItems) = preProject
+		tests\Directory.Build.props = tests\Directory.Build.props
+		tests\Directory.Build.targets = tests\Directory.Build.targets
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9CFB5E29-E750-4312-8FEB-CA29922DBF9E}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
 		build = build
@@ -31,24 +34,45 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		build.ps1 = build.ps1
 		Directory.Build.props = Directory.Build.props
 		Directory.Build.targets = Directory.Build.targets
+		FUNDING.yml = FUNDING.yml
 		global.json = global.json
 		LICENSE = LICENSE
+		README.md = README.md
+		version.json = version.json
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{CC8AB861-E86D-4247-99D4-FA41796629AA}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "azure-templates", "azure-templates", "{9D723994-FDF1-4875-AA1F-EF60A12C7EB7}"
 	ProjectSection(SolutionItems) = preProject
-		tests\Directory.Build.targets = tests\Directory.Build.targets
+		.build\azure-templates\build-pack-and-publish-libraries.yml = .build\azure-templates\build-pack-and-publish-libraries.yml
+		.build\azure-templates\gitversioning-increment-and-persist-versions.yml = .build\azure-templates\gitversioning-increment-and-persist-versions.yml
+		.build\azure-templates\install-dotnet-sdk.yml = .build\azure-templates\install-dotnet-sdk.yml
+		.build\azure-templates\publish-nuget-packages.yml = .build\azure-templates\publish-nuget-packages.yml
+		.build\azure-templates\publish-test-results-for-target-frameworks.yml = .build\azure-templates\publish-test-results-for-target-frameworks.yml
+		.build\azure-templates\publish-test-results-for-test-projects.yml = .build\azure-templates\publish-test-results-for-test-projects.yml
+		.build\azure-templates\publish-test-results.yml = .build\azure-templates\publish-test-results.yml
+		.build\azure-templates\run-tests-on-os.yml = .build\azure-templates\run-tests-on-os.yml
+		.build\azure-templates\show-all-environment-variables.yml = .build\azure-templates\show-all-environment-variables.yml
+		.build\azure-templates\show-all-files.yml = .build\azure-templates\show-all-files.yml
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetFx.System.Runtime.CompilerServices.Unsafe.Tests", "tests\NetFx.System.Runtime.CompilerServices.Unsafe.Tests\NetFx.System.Runtime.CompilerServices.Unsafe.Tests.csproj", "{1B76E7B6-B4E6-4051-825A-0EB5ED9C6163}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetFx.System.Buffers", "src\NetFx.System.Buffers\NetFx.System.Buffers.csproj", "{06C2C915-691E-4B50-9C3F-7B019534728D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetFx.System.Memory", "src\NetFx.System.Memory\NetFx.System.Memory.csproj", "{43921951-C95D-43C6-BA4D-0ED0B242D10D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetFx.System.Memory", "src\NetFx.System.Memory\NetFx.System.Memory.csproj", "{48EA1804-7EFF-4308-909F-706CAB3B262A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetFx.System.Buffers", "src\NetFx.System.Buffers\NetFx.System.Buffers.csproj", "{C7A75D59-1228-4C34-8EC5-7B399C9EAC4C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetFx.System.Runtime.CompilerServices.Unsafe", "src\NetFx.System.Runtime.CompilerServices.Unsafe\NetFx.System.Runtime.CompilerServices.Unsafe.ilproj", "{04BA3E3C-6979-4792-B19E-C797AD607F42}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetFx.System.Buffers.Tests", "tests\NetFx.System.Buffers.Tests\NetFx.System.Buffers.Tests.csproj", "{DFE7F5E9-0934-4C37-B235-B0AF9CF8CDEE}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{5E597B0B-AA34-4265-8B4E-BF5BFB5DA1DA}"
+	ProjectSection(SolutionItems) = preProject
+		tests\Common\AssertExtensions.cs = tests\Common\AssertExtensions.cs
+		tests\Common\BitOperations.cs = tests\Common\BitOperations.cs
+		tests\Common\RuntimeInformation.cs = tests\Common\RuntimeInformation.cs
+	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetFx.System.Memory.Tests", "tests\NetFx.System.Memory.Tests\NetFx.System.Memory.Tests.csproj", "{49AC707C-F8E8-402F-8E64-D238D3533E4D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetFx.System.Buffers.Tests", "tests\NetFx.System.Buffers.Tests\NetFx.System.Buffers.Tests.csproj", "{DDB9D0F3-9CC1-4F76-8278-342BAF483290}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetFx.System.Memory.Tests", "tests\NetFx.System.Memory.Tests\NetFx.System.Memory.Tests.csproj", "{E78A4798-05E5-4C3C-9BF6-C4630C5B9BAA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetFx.System.Runtime.CompilerServices.Unsafe.Tests", "tests\NetFx.System.Runtime.CompilerServices.Unsafe.Tests\NetFx.System.Runtime.CompilerServices.Unsafe.Tests.csproj", "{0DA965E9-7E46-4CE6-A371-20E66CB6A4DF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -56,43 +80,45 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F79D5B6E-CE71-4ABE-ACB8-6385E8C91C63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F79D5B6E-CE71-4ABE-ACB8-6385E8C91C63}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F79D5B6E-CE71-4ABE-ACB8-6385E8C91C63}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F79D5B6E-CE71-4ABE-ACB8-6385E8C91C63}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1B76E7B6-B4E6-4051-825A-0EB5ED9C6163}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1B76E7B6-B4E6-4051-825A-0EB5ED9C6163}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1B76E7B6-B4E6-4051-825A-0EB5ED9C6163}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1B76E7B6-B4E6-4051-825A-0EB5ED9C6163}.Release|Any CPU.Build.0 = Release|Any CPU
-		{43921951-C95D-43C6-BA4D-0ED0B242D10D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{43921951-C95D-43C6-BA4D-0ED0B242D10D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{43921951-C95D-43C6-BA4D-0ED0B242D10D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{43921951-C95D-43C6-BA4D-0ED0B242D10D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C7A75D59-1228-4C34-8EC5-7B399C9EAC4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C7A75D59-1228-4C34-8EC5-7B399C9EAC4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C7A75D59-1228-4C34-8EC5-7B399C9EAC4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C7A75D59-1228-4C34-8EC5-7B399C9EAC4C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DFE7F5E9-0934-4C37-B235-B0AF9CF8CDEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DFE7F5E9-0934-4C37-B235-B0AF9CF8CDEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DFE7F5E9-0934-4C37-B235-B0AF9CF8CDEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DFE7F5E9-0934-4C37-B235-B0AF9CF8CDEE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{49AC707C-F8E8-402F-8E64-D238D3533E4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{49AC707C-F8E8-402F-8E64-D238D3533E4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{49AC707C-F8E8-402F-8E64-D238D3533E4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{49AC707C-F8E8-402F-8E64-D238D3533E4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06C2C915-691E-4B50-9C3F-7B019534728D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06C2C915-691E-4B50-9C3F-7B019534728D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06C2C915-691E-4B50-9C3F-7B019534728D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06C2C915-691E-4B50-9C3F-7B019534728D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48EA1804-7EFF-4308-909F-706CAB3B262A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48EA1804-7EFF-4308-909F-706CAB3B262A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48EA1804-7EFF-4308-909F-706CAB3B262A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48EA1804-7EFF-4308-909F-706CAB3B262A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04BA3E3C-6979-4792-B19E-C797AD607F42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04BA3E3C-6979-4792-B19E-C797AD607F42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04BA3E3C-6979-4792-B19E-C797AD607F42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04BA3E3C-6979-4792-B19E-C797AD607F42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDB9D0F3-9CC1-4F76-8278-342BAF483290}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDB9D0F3-9CC1-4F76-8278-342BAF483290}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDB9D0F3-9CC1-4F76-8278-342BAF483290}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDB9D0F3-9CC1-4F76-8278-342BAF483290}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E78A4798-05E5-4C3C-9BF6-C4630C5B9BAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E78A4798-05E5-4C3C-9BF6-C4630C5B9BAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E78A4798-05E5-4C3C-9BF6-C4630C5B9BAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E78A4798-05E5-4C3C-9BF6-C4630C5B9BAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DA965E9-7E46-4CE6-A371-20E66CB6A4DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DA965E9-7E46-4CE6-A371-20E66CB6A4DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DA965E9-7E46-4CE6-A371-20E66CB6A4DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DA965E9-7E46-4CE6-A371-20E66CB6A4DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{F79D5B6E-CE71-4ABE-ACB8-6385E8C91C63} = {A6DF412F-8147-4D1F-B388-0B0284A55772}
-		{1B76E7B6-B4E6-4051-825A-0EB5ED9C6163} = {CC8AB861-E86D-4247-99D4-FA41796629AA}
-		{43921951-C95D-43C6-BA4D-0ED0B242D10D} = {A6DF412F-8147-4D1F-B388-0B0284A55772}
-		{C7A75D59-1228-4C34-8EC5-7B399C9EAC4C} = {A6DF412F-8147-4D1F-B388-0B0284A55772}
-		{DFE7F5E9-0934-4C37-B235-B0AF9CF8CDEE} = {CC8AB861-E86D-4247-99D4-FA41796629AA}
-		{49AC707C-F8E8-402F-8E64-D238D3533E4D} = {CC8AB861-E86D-4247-99D4-FA41796629AA}
+		{9D723994-FDF1-4875-AA1F-EF60A12C7EB7} = {25739248-87D7-40B0-B267-E2445C92C143}
+		{06C2C915-691E-4B50-9C3F-7B019534728D} = {565E0A3F-633B-4FF1-9244-67E59D16B73A}
+		{48EA1804-7EFF-4308-909F-706CAB3B262A} = {565E0A3F-633B-4FF1-9244-67E59D16B73A}
+		{04BA3E3C-6979-4792-B19E-C797AD607F42} = {565E0A3F-633B-4FF1-9244-67E59D16B73A}
+		{5E597B0B-AA34-4265-8B4E-BF5BFB5DA1DA} = {27FEC39B-F7C9-4110-9F98-BDD75ECF1D1A}
+		{DDB9D0F3-9CC1-4F76-8278-342BAF483290} = {27FEC39B-F7C9-4110-9F98-BDD75ECF1D1A}
+		{E78A4798-05E5-4C3C-9BF6-C4630C5B9BAA} = {27FEC39B-F7C9-4110-9F98-BDD75ECF1D1A}
+		{0DA965E9-7E46-4CE6-A371-20E66CB6A4DF} = {27FEC39B-F7C9-4110-9F98-BDD75ECF1D1A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {218685F0-A12E-4700-A441-099683BEF62D}
+		SolutionGuid = {EFA6E7E8-8559-4BFD-B115-99B3C6321D9E}
 	EndGlobalSection
 EndGlobal
