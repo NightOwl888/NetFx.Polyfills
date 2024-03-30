@@ -51,6 +51,8 @@ stages:
       vmImage: 'windows-latest'
 
     steps:
+    - checkout: self
+      fetchDepth: 0
     - pwsh: |
         $configuration = if ($env:BUILDCONFIGURATION) { $env:BUILDCONFIGURATION } else { "Release" }
         Write-Host "##vso[task.setvariable variable=BuildConfiguration;]$configuration"
