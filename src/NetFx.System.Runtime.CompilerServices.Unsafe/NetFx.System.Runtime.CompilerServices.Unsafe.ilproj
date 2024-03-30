@@ -29,6 +29,7 @@ System.Runtime.CompilerServices.Unsafe
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="System.Runtime.CompilerServices.Unsafe.il" />
     <Compile Include="System.Runtime.CompilerServices.Unsafe.il" />
     <None Include="$(DocumentationFile)">
       <Pack>true</Pack>
