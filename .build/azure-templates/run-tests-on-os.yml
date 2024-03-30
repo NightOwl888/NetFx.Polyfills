@@ -37,11 +37,11 @@ steps:
   parameters:
     sdkVersion: '${{ parameters.dotNetSdkVersion }}'
 
-- task: DownloadBuildArtifacts@0
-  displayName: 'Download Build Artifacts: ${{ parameters.binaryArtifactName }}'
+- task: DownloadPipelineArtifact@2
+  displayName: 'Download Pipeline Artifacts: ${{ parameters.binaryArtifactName }}'
   inputs:
     artifactName: ${{ parameters.binaryArtifactName }}
-    downloadPath: '$(System.DefaultWorkingDirectory)'
+    targetPath: '$(System.DefaultWorkingDirectory)'
 
 - pwsh: |
     $testTargetFrameworksString = '${{ parameters.testTargetFrameworks }}'
