@@ -12,6 +12,8 @@
 Commonly Used Types:
 System.Runtime.CompilerServices.Unsafe
     </PackageDescription>
+    <RepositoryUrl>$(PackageProjectUrl)</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
   
   <PropertyGroup>
@@ -51,6 +53,8 @@ System.Runtime.CompilerServices.Unsafe
           DependsOnTargets="GetAssemblyVersion;ResolveReferences"
           Inputs="$(MSBuildAllProjects)"
           Outputs="'$(VersionFilePath)">
+
+    <Message Importance="high" Text="Commmit hash: $(SourceRevisionId)"/>
     
     <PropertyGroup>
       <IncludePath>$([MSBuild]::NormalizeDirectory('$(IntermediateOutputPath)', 'version'))</IncludePath>
