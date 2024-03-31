@@ -3,6 +3,8 @@
   <PropertyGroup>
     <TargetFrameworks>net40</TargetFrameworks>
     <SignAssembly>false</SignAssembly>
+    <!-- Couldn't figure out how to make the snupkg checksum match the assembly, so we are just skipping having one for this assembly. -->
+    <IncludeSymbols>false</IncludeSymbols>
     <DocumentationFile>$(MSBuildThisFileDirectory)NetFx.System.Runtime.CompilerServices.Unsafe.xml</DocumentationFile>
   </PropertyGroup>
 
@@ -101,7 +103,7 @@ $(ExtraMacros)
 
   <!-- Microsoft.NET.Sdk.IL doesn't support strong naming, so we have to add a step to sign the assembly after it is built.
       We add the .publickey element to the .il (hard coded for now) to make this work. -->
-  <Target Name="SignAssembly" BeforeTargets="BeforePdbGeneration">
+  <Target Name="SignAssembly" BeforeTargets="AfterBuild">
     <Exec Command="&quot;$(TargetFrameworkSDKToolsDirectory)sn.exe&quot; -R &quot;$(TargetPath)&quot; &quot;$(AssemblyOriginatorKeyFile)&quot;" />
   </Target>
 
