@@ -13,9 +13,11 @@ Our goal is to provide support for newer APIs that Microsoft didn't make availab
 
 ## NuGet
 
-[![Nuget](https://img.shields.io/nuget/dt/NetFx.System.Buffers)](https://www.nuget.org/packages/NetFx.System.Buffers)
-[![Nuget](https://img.shields.io/nuget/dt/NetFx.System.Memory)](https://www.nuget.org/packages/NetFx.System.Memory)
-[![Nuget](https://img.shields.io/nuget/dt/NetFx.System.Runtime.CompilerServices.Unsafe)](https://www.nuget.org/packages/NetFx.System.Runtime.CompilerServices.Unsafe)
+| Package  | Link |
+| ------------- | ------------- |
+| **NetFx.System.Buffers**  | [![Nuget](https://img.shields.io/nuget/dt/NetFx.System.Buffers)](https://www.nuget.org/packages/NetFx.System.Buffers) |
+| **NetFx.System.Memory**  | [![Nuget](https://img.shields.io/nuget/dt/NetFx.System.Memory)](https://www.nuget.org/packages/NetFx.System.Memory) |
+| **NetFx.System.Runtime.CompilerServices.Unsafe** | [![Nuget](https://img.shields.io/nuget/dt/NetFx.System.Runtime.CompilerServices.Unsafe)](https://www.nuget.org/packages/NetFx.System.Runtime.CompilerServices.Unsafe) |
 
 
 ## Saying Thanks
