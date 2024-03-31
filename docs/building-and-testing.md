@@ -21,9 +21,7 @@ To build the source, clone or download and unzip the repository. From the reposi
 
 ##### Linux or macOS
 
-```console
-./build [options]
-```
+Not Supported. The build depends on the `sn.exe` tool being in one of the default Windows directory locations.
 
 > **NOTE:** The `build` file will need to be given permission to run using the command `chmod u+x build` before the first execution.
 
@@ -62,9 +60,9 @@ For example the following command creates a Release build with NuGet package wit
 
 ##### Linux or macOS
 
-```console
-./build --configuration Release --test
-```
+Not Supported. The build depends on the `sn.exe` tool being in one of the default Windows directory locations.
+
+### NuGet Distribution
 
 NuGet packages are output by the build to the `/_artifacts/NuGetPackages/` directory. Test results (if applicable) are output to the `/_artifacts/TestResults/` directory.
 
