@@ -9,6 +9,8 @@ These are re-compilations of .NET sources to provide support on .NET Framework 4
 
 Our goal is to provide support for newer APIs that Microsoft didn't make available on .NET Framework 4.0 so you can modernize your code even if you cannot yet upgrade. These libraries are also useful for class libraries that multi-target and would ordinarily be forced to add conditional compilation sections to their code.
 
+These packages have tests to confirm compatibility and are strongly named, so they can be used just like the original packages from Microsoft.
+
 ------------------
 
 ## NuGet
@@ -19,9 +21,10 @@ Our goal is to provide support for newer APIs that Microsoft didn't make availab
 | **NetFx.System.Memory**  | [![Nuget](https://img.shields.io/nuget/dt/NetFx.System.Memory)](https://www.nuget.org/packages/NetFx.System.Memory) |
 | **NetFx.System.Runtime.CompilerServices.Unsafe** | [![Nuget](https://img.shields.io/nuget/dt/NetFx.System.Runtime.CompilerServices.Unsafe)](https://www.nuget.org/packages/NetFx.System.Runtime.CompilerServices.Unsafe) |
 
+------------------
 
 ## Saying Thanks
 
-If you find this library to be useful, please star us [on GitHub](https://github.com/NightOwl888/NetFx.Polyfills) and consider a sponsorship so we can continue bringing you great free tools like this one. It really would make a big difference!
+If you find these libraries to be useful, please star us [on GitHub](https://github.com/NightOwl888/NetFx.Polyfills) and consider a sponsorship so we can continue bringing you great free tools like these. It really would make a big difference!
 
 [![GitHub Sponsors](https://img.shields.io/badge/-Sponsor-fafbfc?logo=GitHub%20Sponsors)](https://github.com/sponsors/NightOwl888)
