@@ -54,8 +54,6 @@ System.Runtime.CompilerServices.Unsafe
           Inputs="$(MSBuildAllProjects)"
           Outputs="'$(VersionFilePath)">
 
-    <Message Importance="high" Text="Commmit hash: $(SourceRevisionId)"/>
-    
     <PropertyGroup>
       <IncludePath>$([MSBuild]::NormalizeDirectory('$(IntermediateOutputPath)', 'version'))</IncludePath>
       <IncludePathTrimmed>$(IncludePath.TrimEnd('\'))</IncludePathTrimmed>
