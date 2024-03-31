@@ -13,8 +13,8 @@
     <GenerateAssemblyVersionInfo>false</GenerateAssemblyVersionInfo>
   </PropertyGroup>
 
-  <!-- J2N will always use semantic versioning, there is no need for a 4 component version number so we don't always have to skip this on Azure DevOps -->
-  <ItemGroup Condition=" '$(SkipGitVersioning.ToLower())' != 'true' ">
+  <!-- For now, excluding this on Azure DevOps is requried for the scripts to properly insert the version numbers, even though we could use the default Nerbank.GitVersioning setup (in theory) because we are strictly following semver -->
+  <ItemGroup Condition=" '$(SkipGitVersioning.ToLower())' != 'true' And '$(TF_BUILD.ToLower())' != 'true' ">
     <PackageReference Include="Nerdbank.GitVersioning" Version="$(NerdBankGitVersioningPackageReferenceVersion)" PrivateAssets="All" />
   </ItemGroup>
 
