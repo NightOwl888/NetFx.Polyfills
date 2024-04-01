@@ -15,6 +15,7 @@
 Commonly Used Types:
 System.Buffers.ArrayPool&lt;T&gt;
     </PackageDescription>
+    <IncludeSymbols>true</IncludeSymbols>
   </PropertyGroup>
 
   <ItemGroup>

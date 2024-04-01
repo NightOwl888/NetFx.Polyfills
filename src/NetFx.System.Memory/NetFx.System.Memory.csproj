@@ -24,6 +24,7 @@ System.Buffers.ReadOnlySequence
 System.Buffers.Text.Utf8Parser
 System.Buffers.Text.Utf8Formatter
     </PackageDescription>
+    <IncludeSymbols>true</IncludeSymbols>
   </PropertyGroup>
 
   <ItemGroup>
