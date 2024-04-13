@@ -102,7 +102,7 @@ Optionally, do additional integration testing on project that depend on the comp
 
 #### Overriding the Version
 
-If something goes wrong with the version generation during the build, it is possible to create a new build with the correct numbers by explicitly defining **all 4** of the following environment variables in the [Azure DevOps Build Pipeline](https://dev.azure.com/NightOwl888/J2N/_build) and triggering it manually. This should only be done as a last resort to unblock a blocked release.
+If something goes wrong with the version generation during the build, it is possible to create a new build with the correct numbers by explicitly defining **all 4** of the following environment variables in the [Azure DevOps Build Pipeline](https://dev.azure.com/NightOwl888/NetFx.Polyfills/_build) and triggering it manually. This should only be done as a last resort to unblock a blocked release.
 
 - `PackageVersion` - The NuGet package version.
 - `AssemblyVersion` - The binary version of the assembly.
