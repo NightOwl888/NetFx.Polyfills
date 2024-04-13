@@ -396,3 +396,10 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+###########################################
+#                 Custom
+###########################################
+
+# BeyondCompare .orig files (when doing conflict resolution)
+*.orig
