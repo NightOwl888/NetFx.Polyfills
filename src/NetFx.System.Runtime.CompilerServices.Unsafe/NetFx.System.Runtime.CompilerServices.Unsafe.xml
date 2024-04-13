@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>DocFx.System.Runtime.CompilerServices.Unsafe</name>
+        <name>NetFx.System.Runtime.CompilerServices.Unsafe</name>
     </assembly>
     <members>
         <member name="T:System.Runtime.CompilerServices.Unsafe">
