@@ -22,7 +22,7 @@ Commonly Used Types:
 
 This package adds support for System.Memory types on .NET Framework 4.0.
 
-As the source code is not available for the System.Memory package that works on .NET Framework 4.5, types in this package have either been decompiled from [System.Memory 4.5.5](https://www.nuget.org/packages/System.Buffers/4.5.1) or have been sourced from newer versions of .NET. Most of the tests from the last release of .NET Core 3.1 (version 3.1.29) have been ported and are all passing. There are 103 tests that pass on this library that don't pass on System.Memory, so it contains some behavior that is more in line with later versions of .NET than with System.Memory 4.5.5. But these are minor (forward-compatible) differences that most users won't notice.
+As the source code is not available for the System.Memory package that works on .NET Framework 4.5, types in this package have either been decompiled from [System.Memory 4.5.5](https://www.nuget.org/packages/System.Memory/4.5.5) or have been sourced from newer versions of .NET. Most of the tests from the last release of .NET Core 3.1 (version 3.1.29) have been ported and are all passing. There are 103 tests that pass on this library that don't pass on System.Memory, so it contains some behavior that is more in line with later versions of .NET than with System.Memory 4.5.5. But these are minor (forward-compatible) differences that most users won't notice.
 
 This is not meant to be an upgrade to System.Memory 4.5.5, it is simply to add support on the `net40` target for all of the existing APIs in System.Memory 4.5.5. It is recommended to use the official release of System.Memory on newer versions of .NET.
 
