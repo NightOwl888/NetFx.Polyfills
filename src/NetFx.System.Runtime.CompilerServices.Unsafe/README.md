@@ -19,6 +19,28 @@ This is a compilation using the System.Runtime.CompilerServices.Unsafe source co
 
 This is not meant to be an upgrade to System.Runtime.CompilerServices.Unsafe 6.0.0, it is simply to add support on the `net40` target for all of the existing APIs in System.Runtime.CompilerServices.Unsafe 6.0.0. It is recommended to use the official release of System.Runtime.CompilerServices.Unsafe on newer versions of .NET.
 
+## Interop with System.Runtime.CompilerServices.Unsafe on Targets > net40
+
+Since the runtime for `net40` hasn't been supported for many years, most likely you will be using a newer runtime with this library. But you may be interoperating with other components that target System.Runtime.CompilerServices.Unsafe, which will cause type collisions by default.
+
+In this case, it is recommended to remove System.Runtime.CompilerServices.Unsafe from compilation and add NetFx.System.Runtime.CompilerServices.Unsafe in its place. Add the following to your `.csproj` or `.vbproj` file. This example is for using `net452`.
+
+```xml
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net452' ">
+    <!-- ExcludeAssets=compile removes the dependency from being referenced.
+         ExcludeAssets=runtime removes the dependency from the build output. -->
+    <PackageReference Include="System.Runtime.CompilerServices.Unsafe"
+                      Version="6.0.0"
+                      ExcludeAssets="compile;runtime" />
+    <PackageReference Include="NetFx.System.Runtime.CompilerServices.Unsafe"
+                      Version="4.0.0" />
+  </ItemGroup>
+```
+
+> **NOTE:** Only SDK-style projects are supported using this method.
+
+For transitive dependencies (that is, dependencies that are not directly referenced) that have a `net40` target, consider [forcing a specific target framework](https://duanenewman.net/blog/post/forcing-a-specific-target-platform-with-packagereference/).
+
 ## Saying Thanks
 
 If you find this library to be useful, please star us [on GitHub](https://github.com/NightOwl888/NetFx.Polyfills) and consider a sponsorship so we can continue bringing you great free tools like this one. It really would make a big difference!
