@@ -5,7 +5,7 @@ This project uses Nerdbank.GitVersioning to assist with creating version numbers
 ## Prerequisites
 
 - [.NET 8 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
-- [nbgv tool](https://www.nuget.org/packages/nbgv/) (the version must match the one used in the [dependencies.props](.build/dependencies.props) file)
+- [nbgv tool](https://www.nuget.org/packages/nbgv/) (the version must match the one used in the [dependencies.props](../.build/dependencies.props) file)
 
 ### Installing NBGV Tool
 
@@ -92,7 +92,7 @@ nbgv get-version
 
 ## Creating a Release Build
 
-The build will automatically launch in Azure DevOps when the release branch is pushed to GitHub. Login to the [Azure DevOps Build Pipeline](https://dev.azure.com/NightOwl888/J2N/_build) where you can view the progress. After the build completes and the tests all pass, download the NuGet files and run some basic checks:
+The build will automatically launch in Azure DevOps when the release branch is pushed to GitHub. Login to the [Azure DevOps Build Pipeline](https://dev.azure.com/NightOwl888/NetFx.Polyfills/_build) where you can view the progress. After the build completes and the tests all pass, download the NuGet files and run some basic checks:
 
 1. Put the `.nupkg` files into a local directory, and add a reference to the directory from Visual Studio. See [this answer](https://stackoverflow.com/a/10240180) for the steps. Check to ensure the NuGet packages can be referenced by a new project and the project will compile.
 2. Check the version information in [JetBrains dotPeek](https://www.jetbrains.com/decompiler/) to ensure the assembly version, file version, and informational version are consistent with what was specified in `version.json`.
